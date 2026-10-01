@@ -107,6 +107,8 @@ h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-
 .brand b { color: var(--margin); font-weight: 400; }
 .iconbtn { border: 1px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 6px 12px; font-size: .8rem; color: var(--ink-2); cursor: pointer; }
 .iconbtn:hover { color: var(--ink); }
+.topbar__tools { display: flex; gap: 8px; }
+.iconbtn[data-install] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
 .main {
   min-width: 0;

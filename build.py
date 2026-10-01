@@ -22,7 +22,8 @@ head_end = body.index("</style>") + len("</style>")
 full = (
     '<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n'
     '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-    '<meta name="theme-color" content="#F5F8FC">\n'
+    '<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F8FC">\n'
+    '<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#18231F">\n'
     + body[:head_end] + "\n</head>\n<body>\n" + body[head_end:] + "\n</body>\n</html>\n"
 )
 (DIST / "corchete.html").write_text(full, encoding="utf-8")

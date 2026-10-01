@@ -506,6 +506,23 @@
   var RENDER = { inicio: viewInicio, apuntes: viewApuntes, analizar: viewAnalizar, pruebas: viewPruebas, fichas: viewFichas, practica: viewPractica };
   var AFTER = { inicio: afterInicio, apuntes: afterApuntes, analizar: afterAnalizar, pruebas: afterPruebas, fichas: afterFichas, practica: afterPractica };
 
+  /* ---------- Instalación como app (PWA) ---------- */
+  function setupPWA() {
+    if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+      navigator.serviceWorker.register("sw.js").catch(function () { /* sin service worker la app funciona igual */ });
+    }
+    var deferred = null;
+    var btns = document.querySelectorAll("[data-install]");
+    function show(on) { for (var i = 0; i < btns.length; i++) btns[i].hidden = !on; }
+    window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; show(true); });
+    window.addEventListener("appinstalled", function () { deferred = null; show(false); toast("Corchete quedó instalada."); });
+    for (var i = 0; i < btns.length; i++) btns[i].addEventListener("click", function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.finally(function () { deferred = null; show(false); });
+    });
+  }
+
   /* ---------- Arranque ---------- */
   function boot() {
     applyTheme();
@@ -518,6 +535,7 @@
     window.addEventListener("hashchange", render);
     anReset();
     render();
+    setupPWA();
 
     var sp = $("#splash");
     if (sp) {

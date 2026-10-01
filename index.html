@@ -3,10 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F5F8FC">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F8FC">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#18231F">
 <title>Corchete</title>
 <meta name="description" content="Cuaderno de análisis para Gramática — Profesorado en Letras, UNaF.">
 <meta name="author" content="RED">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Corchete">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -120,6 +128,8 @@ h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-
 .brand b { color: var(--margin); font-weight: 400; }
 .iconbtn { border: 1px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 6px 12px; font-size: .8rem; color: var(--ink-2); cursor: pointer; }
 .iconbtn:hover { color: var(--ink); }
+.topbar__tools { display: flex; gap: 8px; }
+.iconbtn[data-install] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
 .main {
   min-width: 0;
@@ -402,6 +412,7 @@ td:first-child { font-family: var(--f-display); font-style: italic; white-space:
     </div>
     <nav data-nav></nav>
     <div class="side__foot">
+      <button class="iconbtn" data-install type="button" hidden>Instalar app</button>
       <button class="iconbtn" data-theme-btn type="button">Tema: sistema</button>
       <span class="credit">Hecho por <strong>RED</strong></span>
     </div>
@@ -409,7 +420,10 @@ td:first-child { font-family: var(--f-display); font-style: italic; white-space:
 
   <header class="topbar">
     <button class="brand" data-go="inicio"><b>[</b>Corchete<b>]</b></button>
-    <button class="iconbtn" data-theme-btn type="button">Tema: sistema</button>
+    <div class="topbar__tools">
+      <button class="iconbtn" data-install type="button" hidden>Instalar</button>
+      <button class="iconbtn" data-theme-btn type="button">Tema: sistema</button>
+    </div>
   </header>
 
   <main class="main">
@@ -2327,6 +2341,23 @@ CORCHETE.trees = [
   var RENDER = { inicio: viewInicio, apuntes: viewApuntes, analizar: viewAnalizar, pruebas: viewPruebas, fichas: viewFichas, practica: viewPractica };
   var AFTER = { inicio: afterInicio, apuntes: afterApuntes, analizar: afterAnalizar, pruebas: afterPruebas, fichas: afterFichas, practica: afterPractica };
 
+  /* ---------- Instalación como app (PWA) ---------- */
+  function setupPWA() {
+    if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+      navigator.serviceWorker.register("sw.js").catch(function () { /* sin service worker la app funciona igual */ });
+    }
+    var deferred = null;
+    var btns = document.querySelectorAll("[data-install]");
+    function show(on) { for (var i = 0; i < btns.length; i++) btns[i].hidden = !on; }
+    window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; show(true); });
+    window.addEventListener("appinstalled", function () { deferred = null; show(false); toast("Corchete quedó instalada."); });
+    for (var i = 0; i < btns.length; i++) btns[i].addEventListener("click", function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.finally(function () { deferred = null; show(false); });
+    });
+  }
+
   /* ---------- Arranque ---------- */
   function boot() {
     applyTheme();
@@ -2339,6 +2370,7 @@ CORCHETE.trees = [
     window.addEventListener("hashchange", render);
     anReset();
     render();
+    setupPWA();
 
     var sp = $("#splash");
     if (sp) {

@@ -6,7 +6,7 @@ Corchete es una app de estudio para la materia Gramática. Reúne en un solo lug
 
 **Abrir la app:** https://redmouse7112.github.io/corchete/
 
-Funciona en el celular y en la computadora, sin instalar nada. Para usarla como una app, abrí el link en Chrome y elegí **⋮ → Agregar a la pantalla de inicio**.
+Funciona en el celular y en la computadora. Se puede **instalar como app** (PWA): en Chrome tocá el botón **Instalar** de la app o **⋮ → Instalar app / Agregar a la pantalla de inicio**; en iPhone, desde Safari, **Compartir → Agregar a inicio**. Una vez instalada funciona sin conexión.
 
 ---
 
@@ -44,12 +44,16 @@ Los contenidos son resúmenes y ejemplos elaborados a partir de esa bibliografí
 - **Cuaderno de día, pizarrón de noche:** tema claro con renglones y margen rojo; tema oscuro de pizarrón. Sigue la preferencia del sistema o se cambia a mano.
 - **Corchetes y resaltadores:** cada función sintáctica tiene su color, como en el análisis hecho a mano.
 - **Sin servidor:** el progreso se guarda en el navegador (`localStorage`). No hay cuentas ni datos que salgan del dispositivo.
+- **Instalable y offline:** manifiesto web y service worker; después de la primera visita funciona sin internet.
 
 ## Estructura del proyecto
 
 ```
-index.html        App compilada (la que publica GitHub Pages)
-build.py          Arma index.html a partir de src/
+index.html            App compilada (la que publica GitHub Pages)
+manifest.webmanifest  Datos para instalar la app (nombre, íconos, colores)
+sw.js                 Service worker: guarda la app para usarla sin conexión
+icons/                Íconos de la app (192, 512, maskable, Apple, favicon)
+build.py              Arma index.html a partir de src/
 src/
   template.html   Estructura de la página
   styles.css      Estilos y temas
@@ -69,6 +73,8 @@ python build.py
 ```
 
 Genera `index.html` en la raíz (y una copia en `dist/`).
+
+Al publicar cambios, subí el número de `CACHE` en `sw.js` (por ejemplo, `corchete-v2`) para que los celulares con la app instalada descarguen la versión nueva.
 
 ---
 

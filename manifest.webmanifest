@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Corchete · Cuaderno de análisis",
+  "short_name": "Corchete",
+  "description": "Cuaderno de análisis para Gramática (Profesorado en Letras, UNaF): apuntes, análisis sintáctico guiado, pruebas de reconocimiento, fichas y práctica.",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F5F8FC",
+  "theme_color": "#17223D",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
