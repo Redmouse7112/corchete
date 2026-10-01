@@ -1,0 +1,2357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5F8FC">
+<title>Corchete</title>
+<meta name="description" content="Cuaderno de análisis para Gramática — Profesorado en Letras, UNaF.">
+<meta name="author" content="RED">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Corchete — cuaderno Rivadavia de día, pizarrón de noche.
+   Layout: barra lateral de cuaderno (escritorio) / barra inferior (celular) + hoja central de ~46rem con renglones. */
+:root {
+  --paper: #F5F8FC;
+  --sheet: #FFFFFF;
+  --ink: #17223D;
+  --ink-2: #47557A;
+  --ink-3: #75819E;
+  --rule: #DCE7F3;
+  --margin: #D9596C;
+  --accent: #1E44B0;
+  --accent-soft: #E3EAFB;
+  --on-accent: #FFFFFF;
+  --line: #DCE3EE;
+  --chip: #EDF1F8;
+  --ok: #17704A;
+  --ok-bg: #E1F3E8;
+  --bad: #B02A22;
+  --bad-bg: #FBE6E3;
+  --shadow: 0 1px 2px rgba(23, 34, 61, .06), 0 6px 20px rgba(23, 34, 61, .06);
+
+  --h1b: #DCE7FF; --h1f: #1C3C8C;
+  --h2b: #FFDDE1; --h2f: #97192A;
+  --h3b: #D6F1DE; --h3f: #1B6737;
+  --h4b: #FFEAC4; --h4f: #7E4B00;
+  --h5b: #FFE0CC; --h5f: #8A380B;
+  --h6b: #E9DEFF; --h6f: #5528A0;
+  --h7b: #CFF0ED; --h7f: #0C5F59;
+  --h8b: #F2E7C6; --h8f: #685010;
+  --h9b: #E3E8F0; --h9f: #394559;
+  --h10b: #FBDCEE; --h10f: #8A1D5F;
+  --h11b: #D2EDF9; --h11f: #0A5572;
+  --h12b: #E4EECD; --h12f: #475A10;
+
+  --f-display: "Literata", "Iowan Old Style", Georgia, serif;
+  --f-ui: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --r: 10px;
+  --renglon: 30px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #18231F; --sheet: #1F2C27; --ink: #E9EFE9; --ink-2: #B5C3BA; --ink-3: #879890;
+    --rule: rgba(233, 239, 233, .045); --margin: #E88593; --accent: #9CC1FF; --accent-soft: #24354F; --on-accent: #0D1A30;
+    --line: #33443D; --chip: #283832; --ok: #7FD9A4; --ok-bg: #1E3B2C; --bad: #FF9C92; --bad-bg: #4A2622;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+    --h1b: #22375C; --h1f: #BCD2FF; --h2b: #4C2128; --h2f: #FFC3CA; --h3b: #1E4830; --h3f: #B4EAC4;
+    --h4b: #483916; --h4f: #FFD88C; --h5b: #4B2D1C; --h5f: #FFC6A3; --h6b: #382B55; --h6f: #D6C4FF;
+    --h7b: #1A4542; --h7f: #A3E6DF; --h8b: #443A20; --h8f: #E9D79D; --h9b: #323B48; --h9f: #C9D2DF;
+    --h10b: #48233F; --h10f: #FFBFE4; --h11b: #1A3D4C; --h11f: #ABDEF3; --h12b: #35411D; --h12f: #D1E49F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #18231F; --sheet: #1F2C27; --ink: #E9EFE9; --ink-2: #B5C3BA; --ink-3: #879890;
+  --rule: rgba(233, 239, 233, .045); --margin: #E88593; --accent: #9CC1FF; --accent-soft: #24354F; --on-accent: #0D1A30;
+  --line: #33443D; --chip: #283832; --ok: #7FD9A4; --ok-bg: #1E3B2C; --bad: #FF9C92; --bad-bg: #4A2622;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+  --h1b: #22375C; --h1f: #BCD2FF; --h2b: #4C2128; --h2f: #FFC3CA; --h3b: #1E4830; --h3f: #B4EAC4;
+  --h4b: #483916; --h4f: #FFD88C; --h5b: #4B2D1C; --h5f: #FFC6A3; --h6b: #382B55; --h6f: #D6C4FF;
+  --h7b: #1A4542; --h7f: #A3E6DF; --h8b: #443A20; --h8f: #E9D79D; --h9b: #323B48; --h9f: #C9D2DF;
+  --h10b: #48233F; --h10f: #FFBFE4; --h11b: #1A3D4C; --h11f: #ABDEF3; --h12b: #35411D; --h12f: #D1E49F;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 var(--f-ui);
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+em { font-style: italic; font-family: var(--f-display); }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+
+/* ---------- Splash ---------- */
+.splash {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center; text-align: center;
+  background: var(--paper);
+  padding: 24px;
+  transition: opacity .5s ease, visibility .5s;
+}
+.splash.out { opacity: 0; visibility: hidden; }
+.splash__mark { font-family: var(--f-display); font-weight: 600; font-size: clamp(2.6rem, 9vw, 4.4rem); letter-spacing: -.01em; line-height: 1; }
+.splash__mark b { color: var(--margin); font-weight: 400; display: inline-block; transition: transform .7s cubic-bezier(.2, .8, .2, 1); }
+.splash:not(.ready) .splash__mark b:first-child { transform: translateX(.5em); }
+.splash:not(.ready) .splash__mark b:last-child { transform: translateX(-.5em); }
+.splash__sub { margin-top: 14px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+.splash__credit { position: absolute; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); left: 0; right: 0; font-size: .82rem; color: var(--ink-2); }
+.splash__credit strong { font-family: var(--f-mono); color: var(--margin); letter-spacing: .06em; }
+
+/* ---------- Shell ---------- */
+.app { min-height: 100%; display: grid; grid-template-columns: 1fr; }
+.side { display: none; }
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 16px; background: var(--paper); border-bottom: 1px solid var(--line);
+}
+.brand { font-family: var(--f-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -.01em; background: none; border: 0; padding: 0; cursor: pointer; }
+.brand b { color: var(--margin); font-weight: 400; }
+.iconbtn { border: 1px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 6px 12px; font-size: .8rem; color: var(--ink-2); cursor: pointer; }
+.iconbtn:hover { color: var(--ink); }
+
+.main {
+  min-width: 0;
+  padding-inline: 16px;
+  padding-block: 20px calc(96px + env(safe-area-inset-bottom, 0px));
+  background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--renglon) - 1px), var(--rule) calc(var(--renglon) - 1px) var(--renglon));
+  background-attachment: local;
+}
+.sheet { max-width: 46rem; margin: 0 auto; display: grid; gap: 28px; }
+
+.bottomnav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  background: var(--sheet); border-top: 1px solid var(--line);
+  padding: 4px 4px calc(4px + env(safe-area-inset-bottom, 0px));
+}
+.navbtn {
+  display: grid; justify-items: center; gap: 2px;
+  border: 0; background: none; padding: 6px 2px; border-radius: 8px; cursor: pointer;
+  color: var(--ink-3); font-size: .66rem; font-weight: 600; letter-spacing: .01em;
+}
+.navbtn svg { width: 22px; height: 22px; }
+.navbtn[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+
+@media (min-width: 900px) {
+  .app { grid-template-columns: 232px 1fr; }
+  .topbar, .bottomnav { display: none; }
+  .side {
+    display: flex; flex-direction: column; gap: 22px;
+    position: sticky; top: 0; height: 100vh; padding: 28px 18px 22px 22px;
+    border-right: 2px solid var(--margin);
+    background: var(--sheet);
+  }
+  .side .brand { font-size: 1.6rem; text-align: left; }
+  .side__tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-top: 4px; }
+  .side nav { display: grid; gap: 2px; }
+  .side .navbtn { grid-template-columns: 22px 1fr; justify-items: start; align-items: center; gap: 12px; font-size: .92rem; font-weight: 500; padding: 9px 10px; color: var(--ink-2); }
+  .side .navbtn[aria-current="page"] { color: var(--accent); font-weight: 600; }
+  .side__foot { margin-top: auto; display: grid; gap: 10px; font-size: .8rem; color: var(--ink-3); }
+  .credit strong { font-family: var(--f-mono); color: var(--margin); letter-spacing: .06em; }
+  .main { padding-block: 40px 64px; padding-inline: 40px; }
+}
+
+/* ---------- Tipografía de página ---------- */
+.eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+.pagehead { display: grid; gap: 8px; }
+.pagehead h1 { font-size: clamp(1.7rem, 4.5vw, 2.3rem); font-weight: 600; }
+.lede { color: var(--ink-2); max-width: 60ch; margin: 0; }
+.section-title { font-size: 1.15rem; font-weight: 600; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.muted { color: var(--ink-3); }
+.section-title .muted { font-family: var(--f-ui); font-weight: 400; }
+.small { font-size: .85rem; }
+.mono { font-family: var(--f-mono); }
+
+/* ---------- Botones y chips ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 999px; padding: 10px 18px; font-weight: 600; font-size: .92rem;
+  border: 1px solid var(--line); background: var(--sheet); cursor: pointer; text-decoration: none;
+}
+.btn:hover { border-color: var(--ink-3); }
+.btn--primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.btn--primary:hover { filter: brightness(1.08); border-color: var(--accent); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btnrow { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.chip {
+  flex: none; border: 1px solid var(--line); background: var(--sheet); border-radius: 999px;
+  padding: 6px 12px; font-size: .84rem; cursor: pointer; color: var(--ink-2); white-space: nowrap;
+}
+.chip b { font-family: var(--f-mono); font-weight: 600; margin-right: 6px; color: var(--ink-3); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip[aria-pressed="true"] b { color: var(--paper); opacity: .7; }
+
+.panel { background: var(--sheet); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; box-shadow: var(--shadow); }
+
+/* ---------- Marcas de análisis ---------- */
+.tag { font-family: var(--f-mono); font-size: .7rem; font-weight: 600; letter-spacing: .02em; padding: 1px 7px; border-radius: 4px; white-space: nowrap; }
+[data-c="1"] { --hb: var(--h1b); --hf: var(--h1f); }
+[data-c="2"] { --hb: var(--h2b); --hf: var(--h2f); }
+[data-c="3"] { --hb: var(--h3b); --hf: var(--h3f); }
+[data-c="4"] { --hb: var(--h4b); --hf: var(--h4f); }
+[data-c="5"] { --hb: var(--h5b); --hf: var(--h5f); }
+[data-c="6"] { --hb: var(--h6b); --hf: var(--h6f); }
+[data-c="7"] { --hb: var(--h7b); --hf: var(--h7f); }
+[data-c="8"] { --hb: var(--h8b); --hf: var(--h8f); }
+[data-c="9"] { --hb: var(--h9b); --hf: var(--h9f); }
+[data-c="10"] { --hb: var(--h10b); --hf: var(--h10f); }
+[data-c="11"] { --hb: var(--h11b); --hf: var(--h11f); }
+[data-c="12"] { --hb: var(--h12b); --hf: var(--h12f); }
+.tag[data-c] { background: var(--hb); color: var(--hf); }
+
+.sentence { font-family: var(--f-display); font-size: clamp(1.15rem, 3.4vw, 1.45rem); line-height: 1.5; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px 8px; }
+.sentence .plain { padding-top: 6px; color: var(--ink-2); }
+.cons {
+  display: inline-grid; justify-items: center; gap: 6px;
+  border: 0; background: none; padding: 0; cursor: default; text-align: center;
+}
+.cons__text { position: relative; padding: 4px 10px; border-radius: 6px; }
+.cons__text::before, .cons__text::after { color: var(--margin); font-weight: 400; }
+.cons__text::before { content: "["; margin-right: 3px; }
+.cons__text::after { content: "]"; margin-left: 3px; }
+.cons[data-c] .cons__text { background: var(--hb); color: var(--hf); }
+.cons__label { min-height: 1.1rem; line-height: 1; display: flex; gap: 4px; align-items: center; }
+button.cons { cursor: pointer; }
+button.cons .cons__text { border: 1.5px dashed var(--ink-3); }
+button.cons[data-c] .cons__text { border-style: solid; border-color: transparent; }
+button.cons.is-active .cons__text { border-color: var(--accent); border-style: solid; box-shadow: 0 0 0 3px var(--accent-soft); }
+.cons.is-ok .cons__text { box-shadow: 0 0 0 2px var(--ok); }
+.cons.is-bad .cons__text { box-shadow: 0 0 0 2px var(--bad); }
+.cons__fix { font-family: var(--f-ui); font-size: .72rem; color: var(--bad); font-weight: 600; }
+
+.palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.pal {
+  display: flex; align-items: center; gap: 8px; text-align: left;
+  border: 1px solid var(--line); background: var(--sheet); border-radius: 8px; padding: 8px 10px; cursor: pointer; font-size: .84rem; min-width: 0;
+}
+.pal:hover { border-color: var(--ink-3); }
+.pal .tag { flex: none; }
+.pal span:last-child { min-width: 0; hyphens: auto; -webkit-hyphens: auto; color: var(--ink-2); line-height: 1.25; font-size: .8rem; }
+
+.explain { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.explain li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; font-size: .92rem; }
+.explain .q { font-family: var(--f-display); }
+
+/* ---------- Inicio ---------- */
+.hero { display: grid; gap: 18px; padding: 26px 22px; background: var(--sheet); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; top: 0; bottom: 0; left: 40px; width: 1.5px; background: var(--margin); opacity: .55; }
+.hero > * { position: relative; padding-left: 36px; }
+.hero__foot { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+@media (max-width: 520px) {
+  .hero::before { left: 18px; }
+  .hero > * { padding-left: 14px; }
+}
+
+.units { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.unitrow {
+  display: grid; grid-template-columns: 2.2rem 1fr auto; gap: 14px; align-items: center;
+  width: 100%; padding: 14px 4px; border: 0; border-bottom: 1px solid var(--line); background: none; cursor: pointer; text-align: left;
+}
+.unitrow:hover .unitrow__title { color: var(--accent); }
+.unitrow__n { font-family: var(--f-display); font-size: 1.5rem; color: var(--margin); line-height: 1; text-align: center; }
+.unitrow__title { font-weight: 600; }
+.unitrow__meta { font-size: .8rem; color: var(--ink-3); }
+.meter { width: 84px; height: 6px; border-radius: 999px; background: var(--chip); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.unitrow__score { display: grid; justify-items: end; gap: 4px; font-size: .75rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+.quick { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.quick button { text-align: left; display: grid; gap: 4px; padding: 16px; border-radius: var(--r); border: 1px solid var(--line); background: var(--sheet); cursor: pointer; }
+.quick button:hover { border-color: var(--accent); }
+.quick strong { font-size: .98rem; }
+.quick span { font-size: .84rem; color: var(--ink-3); }
+
+/* ---------- Apuntes ---------- */
+.unithead { display: grid; gap: 10px; }
+.unithead h1 { font-size: clamp(1.6rem, 4.4vw, 2.1rem); font-weight: 600; }
+.unithead h1 small { display: block; font-family: var(--f-mono); font-size: .8rem; font-weight: 500; color: var(--margin); letter-spacing: .08em; margin-bottom: 6px; }
+.sources { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.sources li { font-size: .78rem; background: var(--chip); color: var(--ink-2); padding: 3px 9px; border-radius: 4px; }
+.toc { display: grid; gap: 2px; margin: 0; padding: 12px 16px; list-style: none; border-left: 2px solid var(--margin); }
+.toc a { color: var(--ink-2); text-decoration: none; font-size: .9rem; }
+.toc a:hover { color: var(--accent); }
+.note { display: grid; gap: 12px; scroll-margin-top: 80px; }
+.note h2 { font-size: 1.3rem; font-weight: 600; }
+.note p { margin: 0; max-width: 66ch; }
+.note ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; max-width: 66ch; }
+.examples { margin: 0; padding: 12px 16px; list-style: none; display: grid; gap: 6px; background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; }
+.examples li { font-size: .95rem; }
+.examples li.bad::before { content: "✱ "; color: var(--margin); font-weight: 700; }
+.src { font-size: .78rem; color: var(--ink-3); font-family: var(--f-mono); }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; background: var(--chip); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-family: var(--f-display); font-style: italic; white-space: nowrap; }
+
+/* ---------- Pruebas ---------- */
+.treelist { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.treecard { text-align: left; display: grid; gap: 6px; padding: 18px; border-radius: var(--r); border: 1px solid var(--line); background: var(--sheet); cursor: pointer; }
+.treecard:hover { border-color: var(--accent); }
+.treecard strong { font-family: var(--f-display); font-size: 1.12rem; }
+.treecard span { font-size: .85rem; color: var(--ink-3); }
+.trail { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.trail li { font-size: .84rem; color: var(--ink-3); display: flex; gap: 8px; }
+.trail li b { color: var(--ink-2); font-weight: 600; }
+.step { display: grid; gap: 14px; }
+.step h2 { font-size: 1.25rem; font-weight: 600; }
+.step .help { font-size: .9rem; color: var(--ink-2); background: var(--chip); padding: 10px 12px; border-radius: 8px; margin: 0; }
+.opts { display: grid; gap: 8px; }
+.opt { text-align: left; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--sheet); cursor: pointer; font-size: .95rem; }
+.opt:hover { border-color: var(--accent); }
+.result { border-left: 4px solid var(--accent); padding: 4px 0 4px 16px; display: grid; gap: 6px; }
+.result h2 { font-size: 1.45rem; }
+
+/* ---------- Fichas ---------- */
+.flash { perspective: 1200px; }
+.flash__inner {
+  position: relative; min-height: 240px; border-radius: 14px; transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+  transform-style: preserve-3d; cursor: pointer;
+}
+.flash.is-flipped .flash__inner { transform: rotateY(180deg); }
+.flash__face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  display: grid; align-content: center; gap: 10px; padding: 26px 24px 26px 48px;
+  border-radius: 14px; border: 1px solid var(--line); background: var(--sheet); box-shadow: var(--shadow);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 29px, var(--rule) 29px 30px);
+}
+.flash__face::before { content: ""; position: absolute; top: 0; bottom: 0; left: 30px; width: 1.5px; background: var(--margin); opacity: .6; }
+.flash__face--back { transform: rotateY(180deg); }
+.flash__face p { margin: 0; font-family: var(--f-display); font-size: 1.2rem; line-height: 1.5; }
+.flash__face--back p { font-family: var(--f-ui); font-size: 1rem; }
+.flash__hint { font-size: .75rem; color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase; }
+.boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.boxes div { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 2px; }
+.boxes b { font-family: var(--f-display); font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.boxes span { font-size: .75rem; color: var(--ink-3); }
+
+/* ---------- Práctica ---------- */
+.setup { display: grid; gap: 18px; }
+.field { display: grid; gap: 8px; }
+.field > span { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: .85rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.progress { height: 4px; background: var(--chip); border-radius: 999px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--margin); transition: width .3s; }
+.question { font-family: var(--f-display); font-size: clamp(1.15rem, 3.2vw, 1.35rem); line-height: 1.45; margin: 0; }
+.answers { display: grid; gap: 8px; }
+.answer { display: grid; grid-template-columns: 2rem 1fr; gap: 10px; align-items: baseline; text-align: left; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--sheet); cursor: pointer; font-size: .96rem; }
+.answer:hover:not(:disabled) { border-color: var(--accent); }
+.answer b { font-family: var(--f-mono); color: var(--ink-3); }
+.answer:disabled { cursor: default; }
+.answer.is-picked { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.answer.is-ok { border-color: var(--ok); background: var(--ok-bg); }
+.answer.is-bad { border-color: var(--bad); background: var(--bad-bg); }
+.feedback { border-radius: 8px; padding: 12px 14px; font-size: .92rem; display: grid; gap: 4px; }
+.feedback.ok { background: var(--ok-bg); color: var(--ink); border-left: 4px solid var(--ok); }
+.feedback.bad { background: var(--bad-bg); color: var(--ink); border-left: 4px solid var(--bad); }
+.feedback strong { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+.feedback.ok strong { color: var(--ok); }
+.feedback.bad strong { color: var(--bad); }
+.score { font-family: var(--f-display); font-size: clamp(3rem, 12vw, 4.5rem); font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.score small { font-size: .35em; color: var(--ink-3); font-weight: 400; }
+.reviewlist { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.reviewlist li { display: grid; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font-size: .92rem; }
+.history { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; font-size: .86rem; }
+.history li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-variant-numeric: tabular-nums; }
+
+.toast {
+  position: fixed; left: 50%; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-size: .88rem; z-index: 60;
+  opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.toast.show { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="splash" lang="es" id="splash" aria-hidden="true">
+  <div>
+    <div class="splash__mark"><b>[</b>Corchete<b>]</b></div>
+    <div class="splash__sub">Cuaderno de análisis · Gramática</div>
+  </div>
+  <div class="splash__credit">Hecho por <strong>RED</strong></div>
+</div>
+
+<div class="app" lang="es">
+  <aside class="side" aria-label="Menú">
+    <div>
+      <button class="brand" data-go="inicio"><b>[</b>Corchete<b>]</b></button>
+      <div class="side__tag">Gramática · Letras · UNaF</div>
+    </div>
+    <nav data-nav></nav>
+    <div class="side__foot">
+      <button class="iconbtn" data-theme-btn type="button">Tema: sistema</button>
+      <span class="credit">Hecho por <strong>RED</strong></span>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <button class="brand" data-go="inicio"><b>[</b>Corchete<b>]</b></button>
+    <button class="iconbtn" data-theme-btn type="button">Tema: sistema</button>
+  </header>
+
+  <main class="main">
+    <div class="sheet" id="view" aria-live="polite"></div>
+  </main>
+
+  <nav class="bottomnav" data-nav aria-label="Secciones"></nav>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* Corchete · contenidos · Unidades 1 a 3
+   Formato de texto: _cursiva_ (ejemplos), **negrita**.
+   En "ej", una línea que empieza con * es agramatical.  */
+window.CORCHETE = window.CORCHETE || { units: [], analysis: [], trees: [] };
+
+CORCHETE.units.push({
+  id: "u1",
+  n: 1,
+  title: "Nociones sintácticas",
+  short: "Sintaxis",
+  blurb: "Constituyentes, sintagmas, funciones y papeles temáticos, sujeto y clases de verbos.",
+  sources: ["Ciapuscio y Ferrari (2004), cap. 2", "Di Tullio, Manual, caps. III–VI", "Giammatteo, cap. 2"],
+  sections: [
+    {
+      t: "Qué estudia la sintaxis",
+      p: [
+        "La sintaxis estudia cómo se combinan las palabras: el orden, los vínculos entre ellas y lo que unas **exigen** de otras. La oración no es una cadena de palabras sueltas: tiene **estructura jerárquica**. Las palabras forman grupos (constituyentes) y esos grupos forman otros mayores.",
+        "Para saber si un grupo de palabras es un constituyente se aplican **pruebas**: sustitución por un pronombre, conmutación, desplazamiento, coordinación, interrogación y omisión. Si el grupo se comporta en bloque, es un constituyente."
+      ],
+      k: [
+        "Expansión: agregar modificadores sin cambiar la estructura.",
+        "Reducción: reemplazar un grupo entero por un pronombre.",
+        "Interrogación: la respuesta a una pregunta es siempre un constituyente."
+      ],
+      ej: [
+        "_El bibliotecario puso el libro viejo en el estante._",
+        "_El bibliotecario de guardapolvo azul puso el libro viejo en el estante._ (expansión)",
+        "_Él puso el libro viejo en el estante._ (reducción por sustitución pronominal)",
+        "_¿Dónde lo puso? En el estante._"
+      ],
+      src: "Ciapuscio y Ferrari, cap. 2 §1"
+    },
+    {
+      t: "Los sintagmas",
+      p: [
+        "Cada palabra léxica es **núcleo** de un sintagma y le da su categoría: si el núcleo es un sustantivo, el grupo es un sintagma nominal (SN); si es un verbo, un SV; y así con el adjetivo (SAdj), el adverbio (SAdv) y la preposición (SP).",
+        "El núcleo puede reemplazar a todo el sintagma, salvo en el SP: la preposición necesita siempre un **término** (_*Voy hacia_). Por eso la preposición es una clase atípica entre las léxicas.",
+        "El **potencial funcional** es el conjunto de funciones que puede cumplir un sintagma. Un SN, por ejemplo, puede ser sujeto, objeto directo o término de preposición."
+      ],
+      ej: [
+        "SN: _la [casa] grande_",
+        "SV: _[come] mucho_",
+        "SAdj: _bastante [grande]_",
+        "SAdv: _muy [lentamente]_",
+        "SP: _[hacia] el río_"
+      ],
+      src: "Giammatteo, cap. 2 §1 · Di Tullio, cap. IV"
+    },
+    {
+      t: "Función sintáctica y papel temático",
+      p: [
+        "La **función sintáctica** es la relación formal de un constituyente con los demás: sujeto, objeto directo, objeto indirecto, etc. El **papel temático** es el modo en que ese participante interviene en el evento: agente, tema o paciente, experimentante, beneficiario, origen, meta, locativo, instrumento.",
+        "Función y papel **no coinciden necesariamente**. El sujeto es muchas veces agente, pero también puede ser tema (en la pasiva o con verbos inacusativos) o experimentante (con verbos de sentimiento)."
+      ],
+      ej: [
+        "_El árbitro_ (agente) _suspendió el partido_ (tema).",
+        "_La boda_ (tema) _fue pospuesta por el novio_ (agente).",
+        "_Surgieron problemas de organización._ (sujeto tema, pospuesto)",
+        "_Los estudiantes_ (experimentante) _sentimos pena_ (tema) _por la renuncia._"
+      ],
+      src: "Ciapuscio y Ferrari, cap. 2 §3"
+    },
+    {
+      t: "Sujeto y predicado",
+      p: [
+        "La marca formal del sujeto es la **concordancia** en número y persona con el verbo. Por la rica flexión verbal del español, el sujeto puede quedar **tácito** (desinencial): _Llegamos tarde_.",
+        "Algunas oraciones no tienen sujeto: los verbos meteorológicos (_Llueve_), **haber** existencial (_Hay muchos indagados_) y **hacer** temporal o climático (_Hace frío_, _Hace años_).",
+        "Un SN plural que designa personas puede concordar en 1.ª o 2.ª persona si incluye al hablante o al oyente: _Los padres no siempre sabemos lo que es bueno para los hijos_."
+      ],
+      src: "Di Tullio, cap. VI · RAE, Manual §4.2.3"
+    },
+    {
+      t: "Estructura argumental y clases de verbos",
+      p: [
+        "El verbo es un predicado que **selecciona argumentos**: el argumento externo se realiza como sujeto y los internos como complementos. Los **adjuntos** no son seleccionados: agregan circunstancias y se pueden omitir.",
+        "Según sus argumentos, los verbos se agrupan así:"
+      ],
+      k: [
+        "**Transitivos**: piden objeto directo (_leer un libro_).",
+        "**Ditransitivos**: OD + OI (_dar, decir, pedir algo a alguien_).",
+        "**Inergativos**: intransitivos de actividad controlada por el sujeto (_trabajar, suspirar, rugir_).",
+        "**Inacusativos**: intransitivos cuyo sujeto es tema o afectado, no agente (_llegar, surgir, faltar, crecer_). Admiten sujeto pospuesto sin determinante: _Llegaron invitados_.",
+        "**Copulativos**: ser, estar, parecer + atributo.",
+        "**Preposicionales**: piden complemento de régimen (_confiar en, abusar de_)."
+      ],
+      src: "Di Tullio, cap. VI · PPT clase 27/8"
+    },
+    {
+      t: "El sintagma nominal",
+      p: [
+        "El SN se organiza alrededor de un núcleo sustantivo, con determinante opcional y complementos: sintagmas adjetivos, preposicionales o proposiciones relativas.",
+        "Los complementos pueden ser **restrictivos** (sin pausa; reducen la referencia: de todos los policías, solo los separados de sus cargos) o **no restrictivos** (entre comas; agregan información sin recortar). La **aposición** es un SN que se suma a otro para identificarlo o describirlo."
+      ],
+      ej: [
+        "_Los policías separados de sus cargos interpusieron recursos legales._ (restrictivo)",
+        "_Los policías, separados de sus cargos, interpusieron recursos legales._ (no restrictivo)",
+        "_El Louvre, museo de ensueño, se halla en refacción._ (aposición)"
+      ],
+      src: "Ciapuscio y Ferrari, cap. 2 §4"
+    }
+  ],
+  cards: [
+    { f: "¿Qué prueba muestra que _el libro viejo_ es un constituyente en _Puso el libro viejo en el estante_?", b: "Se reemplaza en bloque por un pronombre: _Lo puso en el estante_." },
+    { f: "Diferencia entre función sintáctica y papel temático", b: "La función es la relación formal (sujeto, OD…). El papel temático es cómo participa en el evento (agente, tema, experimentante…). No coinciden necesariamente." },
+    { f: "¿Cuál es la marca formal del sujeto?", b: "La concordancia en número y persona con el verbo." },
+    { f: "Verbo inacusativo", b: "Intransitivo cuyo sujeto es tema o afectado, no agente: _llegar, surgir, faltar_. Suele llevar sujeto pospuesto: _Faltan vacunas_." },
+    { f: "Verbo inergativo", b: "Intransitivo de actividad causada y controlada por el sujeto: _trabajar, suspirar, rugir_." },
+    { f: "¿Qué es un argumento?", b: "Un participante seleccionado por el predicado. El externo es el sujeto; los internos, los complementos." },
+    { f: "¿Qué es un adjunto?", b: "Un modificador no seleccionado por el verbo: agrega circunstancias y es omisible." },
+    { f: "¿Por qué la preposición es atípica entre las clases léxicas?", b: "Su núcleo no puede reemplazar al sintagma: siempre exige un término (_*Voy hacia_)." },
+    { f: "Tres construcciones sin sujeto", b: "Verbos meteorológicos (_llueve_), _haber_ existencial (_hay gente_) y _hacer_ temporal (_hace años_)." },
+    { f: "Complemento restrictivo vs. no restrictivo del nombre", b: "El restrictivo va sin pausa y recorta la referencia. El no restrictivo va entre comas y solo agrega información." },
+    { f: "Aposición", b: "SN que acompaña a otro SN para identificarlo o describirlo: _El Louvre, museo de ensueño, …_" },
+    { f: "Papel temático del sujeto en _Los estudiantes sentimos pena_", b: "Experimentante." }
+  ],
+  quiz: [
+    { q: "En _La boda fue pospuesta por el novio_, ¿qué papel temático tiene el sujeto?", o: ["Agente", "Tema", "Experimentante", "Beneficiario"], a: 1, x: "El sujeto de la pasiva es lo afectado por la acción: tema. El agente aparece en el complemento _por el novio_." },
+    { q: "¿Cuál de estos verbos es inacusativo?", o: ["trabajar", "suspirar", "surgir", "cantar"], a: 2, x: "_Surgir_ tiene un sujeto tema que no controla el evento y suele ir pospuesto: _Surgieron problemas_." },
+    { q: "¿Cuál de estas oraciones no tiene sujeto?", o: ["Se aproximan las elecciones.", "Hay muchos indagados.", "Aumentan los evacuados.", "Llegaron los alumnos."], a: 1, x: "_Haber_ existencial es impersonal: _muchos indagados_ es su objeto directo (_los hay_)." },
+    { q: "En _Los policías, separados de sus cargos, interpusieron recursos_, el grupo entre comas es:", o: ["Un complemento restrictivo", "Un complemento no restrictivo", "El objeto directo", "Un complemento de régimen"], a: 1, x: "Va entre pausas y no recorta el conjunto de policías: agrega información sobre todos ellos." },
+    { q: "¿Qué sintagma no puede ser reemplazado por su núcleo?", o: ["SN", "SAdj", "SAdv", "SP"], a: 3, x: "La preposición exige un término: _hacia el río_, pero no _*hacia_." },
+    { q: "¿Qué NO es una prueba para reconocer constituyentes?", o: ["Sustituir por un pronombre", "Contar las sílabas", "Hacer una pregunta", "Desplazar el grupo"], a: 1, x: "Las pruebas miran el comportamiento sintáctico del grupo, no su extensión." },
+    { q: "En _Juan resolvió los problemas_, _los problemas_ es:", o: ["Argumento externo", "Argumento interno", "Adjunto", "Aposición"], a: 1, x: "Es seleccionado por el verbo y se realiza como complemento: argumento interno (OD)." },
+    { q: "_Los padres no siempre sabemos…_ El verbo va en 1.ª persona porque:", o: ["Es un error de concordancia", "El SN incluye al hablante", "El sujeto es tácito", "Es una construcción impersonal"], a: 1, x: "Un SN plural de personas puede concordar en 1.ª persona cuando el hablante se incluye." }
+  ]
+});
+
+CORCHETE.units.push({
+  id: "u2",
+  n: 2,
+  title: "Clases de palabras",
+  short: "Palabras",
+  blurb: "Léxicas y funcionales: sustantivo, adjetivo, pronombre, verbo, adverbio, preposición, determinativos y conjunciones.",
+  sources: ["Giammatteo, caps. 2–4 (TP2–TP6, TP9)", "RAE, Manual caps. 12 y 13", "Di Tullio, Manual cap. X", "Demonte, GDLE §3.6", "Alcina y Blecua, §4.9"],
+  sections: [
+    {
+      t: "Palabras léxicas y funcionales",
+      p: [
+        "Las **palabras léxicas** tienen significado propio y son núcleos de sintagma. Morfológicamente se dividen en **flexionales** (sustantivo, adjetivo, verbo) y **no flexionales** (adverbio y preposición).",
+        "Las **palabras funcionales** tienen significado gramatical: se precisa en relación con otras palabras. Son los **determinativos** (especifican al sustantivo: _el árbol_) y las **conjunciones** (conectan: _gatos y perros_). Las de naturaleza pronominal pueden aparecer solas: _Vinieron pocos_."
+      ],
+      src: "Giammatteo, caps. 2 y 4"
+    },
+    {
+      t: "El sustantivo",
+      p: [
+        "Nombra entidades de todo tipo: personas, cosas, sentimientos, acciones. Admite género y número y forma SN."
+      ],
+      k: [
+        "**Comunes y propios**: el común clasifica (_mujer, país_); el propio identifica sin describir (_Paula, Colombia_) y no se traduce.",
+        "**Contables y no contables**: los contables admiten plural y numerales (_tres mesas_); los no contables, _mucho/poco_ en singular (_mucha arena_) y el adjetivo _abundante_. Contraste: _Compraré pan / Compraré libros / *Compraré libro_.",
+        "**Colectivos**: en singular designan un conjunto (_rebaño, profesorado_). Admiten _numeroso_. La concordancia en plural (_Toda la familia iban_) se recomienda evitar.",
+        "**Cuantificativos**: acotadores (_una brizna de hierba_), de medida (_un litro de leche_) y de grupo (_un montón de regalos_). **Clasificativos**: _clase, tipo, especie_.",
+        "**Abstractos**: se forman con sufijos como _-ura, -ez/-eza, -ía_ (cualidades) o _-ción, -miento, -aje_ (acciones).",
+        "**Eventivos**: pueden ser sujeto de _tener lugar_ o término de _durante_ (_la reunión, la batalla_)."
+      ],
+      ej: [
+        "_un corcho, dos cristales_ (no contable usado como contable)",
+        "_Es una belleza._ (no contable que pasa a designar una persona)"
+      ],
+      src: "RAE, Manual cap. 12 · Giammatteo, cap. 2 §2"
+    },
+    {
+      t: "El adjetivo",
+      p: [
+        "Modifica al sustantivo y concuerda con él. Hay tres grandes clases:"
+      ],
+      k: [
+        "**Calificativos**: asignan propiedades, son graduables (_muy alto, altísimo_), tienen antónimos y pueden anteponerse.",
+        "**Relacionales**: vinculan el sustantivo con un ámbito, ‘perteneciente o relativo a’ (_línea telefónica, visita papal_). No se gradúan, van pospuestos y no son atributos salvo en contraste (_El problema es político_). Incluyen los gentilicios.",
+        "**Adverbiales**: equivalen a un adverbio en _-mente_. Intensionales o modales (_presunto asesino, posible novia, verdadero amigo, mero trámite_), circunstanciales (_antiguo acuerdo, futuro presidente_) y aspectuales (_constantes viajes_)."
+      ],
+      ej: [
+        "_cartelera teatral_ (relacional) / _gesto teatral_ (calificativo)",
+        "_una simple mentira_ / _una mentira simple_",
+        "_la antigua casa_ (la de antes) / _la casa antigua_ (vieja)",
+        "_un seguro acuerdo_ (cierto) / _un acuerdo seguro_ (firme)"
+      ],
+      src: "RAE, Manual §13.5 · Demonte, GDLE §3.6"
+    },
+    {
+      t: "Posición del adjetivo",
+      p: [
+        "La posición **posnominal** es la no marcada: allí van los adjetivos restrictivos (calificativos, relacionales). En posición **prenominal** van los no restrictivos (epítetos) y los adverbiales.",
+        "Delante del sustantivo se admiten adjetivos con modificador de grado (_su muy digno discípulo_) o coordinados (_un cómodo y lujoso coche_), pero no los que llevan complemento (_*un fácil de arreglar problema_)."
+      ],
+      src: "RAE, Manual §13.6 · Demonte, GDLE §3.6"
+    },
+    {
+      t: "Los pronombres",
+      p: [
+        "Son una subclase cerrada del sustantivo, con significado gramatical. Se interpretan en relación con la situación o el texto:"
+      ],
+      k: [
+        "**Deixis**: señalan la situación de habla (_Yo no te veía por aquí_).",
+        "**Anáfora**: remiten a algo dicho antes (_Juan resolvió los problemas pero la maestra no lo felicitó_).",
+        "**Catáfora**: anticipan algo que viene después (_Juan necesita eso, que lo quieran_)."
+      ],
+      ej: [
+        "Personales tónicos (_yo, vos, usted, él_) y átonos o clíticos (_me, te, lo, la, le, se_).",
+        "Solo en 3.ª persona se distinguen acusativo (_lo, la_) y dativo (_le_), y oblicuo (_lo_) y reflexivo (_se_).",
+        "Demostrativos (_este, ese, aquel_), posesivos (_mi, tuyo_), relativos (_que, quien, cual, cuyo_), interrogativos y exclamativos, indefinidos (_alguien, nada, cualquiera_)."
+      ],
+      src: "Di Tullio, cap. X · Giammatteo, cap. 4"
+    },
+    {
+      t: "El verbo",
+      p: [
+        "Es el núcleo de la predicación. Sus formas son **finitas** (con tiempo, modo, aspecto, número y persona) o **no finitas** (infinitivo, participio, gerundio).",
+        "Los tiempos **absolutos** o deícticos se miden desde el momento del habla: _canto, canté, cantaré_. Los **relativos** o anafóricos toman como referencia otro momento: _cantaba, había cantado, cantaría_ respecto de un pasado; _he cantado, habré cantado_ respecto del presente o el futuro. _Habría cantado_ es relativo de tercer grado.",
+        "El **aspecto** es interno: dice cómo ocurre el evento (terminado, en curso, repetido). El tiempo lo ubica desde afuera."
+      ],
+      ej: [
+        "_Cuando llegué al colegio, la maestra se retiraba._ (simultáneo a un pasado)",
+        "_Cuando llegué al colegio, la maestra ya se había retirado._ (anterior a un pasado)",
+        "_La maestra anunció que se retiraría temprano._ (posterior a un pasado)"
+      ],
+      src: "Giammatteo, cap. 3 (TP9)"
+    },
+    {
+      t: "El adverbio",
+      p: [
+        "Es invariable. Modifica a un verbo, un adjetivo, otro adverbio o toda la oración (_Realmente, no es fácil distinguir una de otra_)."
+      ],
+      k: [
+        "**Cualificativos**: _bien, mal_, los terminados en _-mente_ y los adjetivos adverbializados (_hablar bajo, pisar fuerte_).",
+        "**Proporcionales**: _pronto, temprano, tarde_.",
+        "**Prepositivos**: _cerca/lejos, delante/detrás, encima/debajo_. Admiten término con _de_ (_delante de mí_) y se posponen al nombre (_calle arriba_).",
+        "**Pronominales**: _aquí, ahora, así_; relativos (_donde, cuando, como_) e interrogativos.",
+        "**De polaridad**: _sí, no, también, tampoco_.",
+        "**Locuciones adverbiales**: _a sabiendas, a hurtadillas, de vez en cuando_."
+      ],
+      ej: [
+        "_Las hijas contestaron alegre y expresivamente._ (solo el último lleva _-mente_)",
+        "_recién pintado, casi vacía, medio caídos_ (usos prefijales)"
+      ],
+      src: "Alcina y Blecua §4.9 · Giammatteo, cap. 3"
+    },
+    {
+      t: "Preposiciones, determinativos y conjunciones",
+      p: [
+        "La **preposición** encabeza un SP y exige término. Puede tener significado pleno (_sobre la mesa_) o estar vacía cuando la rige el verbo (_confiar en_).",
+        "Los **determinativos** (artículos, demostrativos, posesivos, cuantificadores) dan referencia al sustantivo. Las **conjunciones** coordinantes (_y, ni, o, pero, sino_) unen elementos del mismo nivel; las subordinantes (_que, si, porque, aunque_) incluyen una proposición en otra."
+      ],
+      src: "Giammatteo, caps. 3 y 4"
+    }
+  ],
+  cards: [
+    { f: "Palabras léxicas flexionales y no flexionales", b: "Flexionales: sustantivo, adjetivo, verbo. No flexionales: adverbio y preposición." },
+    { f: "¿Qué son las palabras funcionales?", b: "Palabras de significado gramatical que se precisa en relación con otras: determinativos y conjunciones." },
+    { f: "Prueba del adjetivo _abundante_", b: "Se combina típicamente con sustantivos no contables: _agua abundante, abundante bibliografía_." },
+    { f: "Prueba del adjetivo _numeroso_", b: "Detecta sustantivos colectivos en singular: _familia numerosa, público numeroso_." },
+    { f: "Tres clases de sustantivos cuantificativos", b: "Acotadores (_una brizna de hierba_), de medida (_un litro de agua_) y de grupo (_un montón de regalos_)." },
+    { f: "Sustantivo eventivo", b: "Designa un suceso: puede ser sujeto de _tener lugar_ o término de _durante_ (_la reunión tuvo lugar…_)." },
+    { f: "Adjetivo relacional", b: "‘Perteneciente o relativo a’: _línea telefónica_. No graduable, pospuesto, no atributo salvo contraste." },
+    { f: "Adjetivo intensional (adverbial)", b: "Modifica cómo se aplica el concepto, no al objeto: _presunto asesino, verdadero amigo_. Va antepuesto." },
+    { f: "_la antigua casa_ vs. _la casa antigua_", b: "Antepuesto: ‘la que fue casa antes’ (circunstancial). Pospuesto: ‘casa vieja’ (calificativo)." },
+    { f: "Deixis, anáfora y catáfora", b: "Deixis: señala la situación. Anáfora: remite a lo dicho antes. Catáfora: anticipa lo que sigue." },
+    { f: "¿En qué persona se distinguen _lo_ (acusativo) y _le_ (dativo)?", b: "Solo en 3.ª persona. En las demás hay una forma única de caso objetivo (_me, te, nos_)." },
+    { f: "Tiempos absolutos del indicativo", b: "Presente (_canto_), pretérito perfecto simple (_canté_) y futuro (_cantaré_): se miden desde el momento del habla." },
+    { f: "¿Por qué _cantaba_ es un tiempo relativo?", b: "Indica simultaneidad respecto de otro momento pasado, no del momento del habla." },
+    { f: "Adverbios prepositivos", b: "Admiten término con _de_ y se oponen en pares: _delante/detrás, cerca/lejos, encima/debajo_." },
+    { f: "Adverbios de polaridad", b: "_sí, no, también, tampoco_." },
+    { f: "Conjunción coordinante vs. subordinante", b: "La coordinante une elementos del mismo nivel (_y, pero_). La subordinante incluye una proposición en otra (_que, si, porque_)." }
+  ],
+  quiz: [
+    { q: "¿Cuál de estas clases es léxica pero no flexional?", o: ["Sustantivo", "Adjetivo", "Adverbio", "Verbo"], a: 2, x: "Adverbio y preposición son léxicas no flexionales." },
+    { q: "¿Qué oración muestra un sustantivo no contable?", o: ["Compraré libros.", "Compraré pan.", "Compraré tres mesas.", "Compraré varias sillas."], a: 1, x: "_Pan_ aparece en singular sin determinante en posición de OD, como los contables en plural." },
+    { q: "¿Qué adjetivo detecta mejor un sustantivo colectivo?", o: ["abundante", "numeroso", "copioso", "cuantioso"], a: 1, x: "_Numeroso_ se aplica a pluralidades de individuos: _familia numerosa_." },
+    { q: "En _visita papal_, el adjetivo es:", o: ["Calificativo", "Relacional", "Intensional", "Aspectual"], a: 1, x: "Relaciona _visita_ con el Papa: equivale a ‘la visita del Papa’ (relacional argumental)." },
+    { q: "¿Cuál es un adjetivo intensional?", o: ["rojo", "presunto", "telefónico", "frecuente"], a: 1, x: "_Presunto_ no asigna una propiedad al referente: modifica cómo se aplica el concepto _asesino_." },
+    { q: "_Juan necesita eso, que lo quieran._ El pronombre _eso_ funciona:", o: ["Deícticamente", "Anafóricamente", "Catafóricamente", "Como relativo"], a: 2, x: "Anticipa la proposición que sigue: es una catáfora." },
+    { q: "¿Cuál es un tiempo relativo (anafórico)?", o: ["canté", "cantaré", "había cantado", "canto"], a: 2, x: "El pluscuamperfecto expresa anterioridad respecto de otro pasado." },
+    { q: "¿Qué adverbio es prepositivo?", o: ["temprano", "delante", "ahora", "también"], a: 1, x: "_Delante_ admite término con _de_: _delante de la casa_." },
+    { q: "_*un fácil de arreglar problema_ es agramatical porque:", o: ["Los calificativos no se anteponen", "No se antepone un adjetivo con complemento", "_Fácil_ es relacional", "Falta el artículo"], a: 1, x: "Se anteponen adjetivos con grado o coordinados, pero no con complemento." },
+    { q: "¿Qué palabra es funcional?", o: ["casa", "correr", "el", "lindo"], a: 2, x: "El artículo tiene significado gramatical: especifica referencia, género y número." }
+  ]
+});
+
+CORCHETE.units.push({
+  id: "u3",
+  n: 3,
+  title: "Flexión verbal",
+  short: "Flexión",
+  blurb: "Raíz y desinencia, temas verbales, paradigma, voseo y verbos irregulares.",
+  sources: ["RAE, Manual cap. 4", "Giammatteo, cap. 3 (TP9)", "Di Tullio, Manual cap. XIII"],
+  sections: [
+    {
+      t: "Raíz y desinencia",
+      p: [
+        "La forma verbal tiene una **raíz** (significado léxico) y una **desinencia** (información gramatical). La desinencia se divide en tres segmentos: **vocal temática** (VT), **tiempo-modo** (TM) y **persona-número** (PN).",
+        "La VT indica la conjugación: _-a-_ (1.ª, _amar_), _-e-_ (2.ª, _temer_), _-i-_ (3.ª, _partir_). La 1.ª agrupa cerca del 90 % de los verbos y es la única productiva: a ella van los verbos nuevos en _-ear, -izar, -ificar_.",
+        "Cuando un segmento no tiene forma visible se postula un segmento nulo (Ø): _cant-Ø-e-mos_."
+      ],
+      ej: [
+        "_mir-a-ba-s_ = raíz + VT + TM + PN",
+        "_cant-á-ba-mos_",
+        "_cant-Ø-o-Ø_ (1.ª persona del presente)"
+      ],
+      src: "RAE, Manual §4.1–4.2"
+    },
+    {
+      t: "Los tres temas",
+      k: [
+        "**Tema de presente**: presente de indicativo, presente de subjuntivo e imperativo.",
+        "**Tema de pretérito**: pretérito perfecto simple, imperfecto y futuro de subjuntivo, participio y gerundio.",
+        "**Tema de futuro**: futuro, condicional e infinitivo. El futuro y el condicional vienen de una perífrasis latina gramaticalizada (_amar he_ > _amaré_)."
+      ],
+      src: "RAE, Manual §4.2.1–4.2.2"
+    },
+    {
+      t: "El paradigma",
+      p: [
+        "Nombres de la RAE y, entre paréntesis, de Andrés Bello, que aparecen en la bibliografía de la cátedra:"
+      ],
+      table: {
+        head: ["Forma", "RAE", "Bello"],
+        rows: [
+          ["canto", "Presente", "Presente"],
+          ["canté", "Pretérito perfecto simple", "Pretérito"],
+          ["cantaba", "Pretérito imperfecto", "Copretérito"],
+          ["cantaré", "Futuro simple", "Futuro"],
+          ["cantaría", "Condicional simple", "Pospretérito"],
+          ["he cantado", "Pret. perfecto compuesto", "Antepresente"],
+          ["había cantado", "Pret. pluscuamperfecto", "Antecopretérito"],
+          ["hube cantado", "Pretérito anterior", "Antepretérito"],
+          ["habré cantado", "Futuro compuesto", "Antefuturo"],
+          ["habría cantado", "Condicional compuesto", "Antepospretérito"],
+          ["cante", "Presente de subjuntivo", "Presente"],
+          ["cantara / cantase", "Pret. imperfecto de subjuntivo", "Pretérito"],
+          ["cantare", "Futuro de subjuntivo", "Futuro"]
+        ]
+      },
+      src: "RAE, Manual §4.1.3 y §4.9"
+    },
+    {
+      t: "El voseo",
+      p: [
+        "Es el uso de _vos_ para un solo interlocutor, con sus formas verbales propias. En el Río de la Plata es la forma de confianza general.",
+        "Hay **voseo pronominal** (uso de _vos_) y **voseo flexivo** (desinencias propias). Pueden darse juntos (_vos tenés_) o por separado (_tú tenés_, _vos tienes_)."
+      ],
+      k: [
+        "Presente: _cantás, temés, partís_.",
+        "Imperativo: acento final y sin _-d_: _cantá, comé, salí, vení, decí_.",
+        "Subjuntivo, sobre todo en negativos: _No digás, No llamés_.",
+        "Pretérito: _cantaste_. Las formas _*cantastes, *dijistes_ se consideran incorrectas.",
+        "_Ir_ no tiene imperativo voseante: se usa _andá_."
+      ],
+      src: "RAE, Manual §4.3.2"
+    },
+    {
+      t: "Verbos irregulares",
+      p: [
+        "Son irregulares los que no siguen los modelos _amar, temer, partir_. Los cambios ortográficos regulares (_saco/saque_) no cuentan como irregularidad."
+      ],
+      k: [
+        "**Vocálicas**: _acertar → acierto_ (e/ie), _contar → cuento_ (o/ue), _pedir → pido_ (e/i), _adquirir → adquiero_, _jugar → juego_. _Sentir_ y _dormir_ combinan dos: _siento/sintió, duermo/durmió_.",
+        "**Consonánticas**: _agradezco, luzco, conduzco_ (-zc-); _salgo, tengo, vengo_ (-g-); _caigo, traigo_ (-ig-).",
+        "**Mixtas**: _hacer → hago_, _decir → digo_, _caber → quepo_, _saber → sepa_.",
+        "**Futuro irregular**: _sabré, podré, querré_; con _d_ epentética: _pondré, saldré, tendré, vendré_; reducido: _haré, diré_.",
+        "**Pretéritos fuertes** (acento en la raíz): _hice, dije, quise, pude, puse, supe, tuve, anduve, traje, conduje_.",
+        "**Supletivos**: varias raíces. _Ir_: _voy, fui, iba_. _Ser_: _soy, fui, era_.",
+        "**Defectivos**: conjugación incompleta: _llover, soler, acaecer, balbucir_."
+      ],
+      src: "RAE, Manual §4.4–4.8"
+    },
+    {
+      t: "Participios irregulares",
+      p: [
+        "Heredados del latín, llevan el acento en la raíz: _abierto, cubierto, dicho, escrito, hecho, muerto, puesto, roto, visto, vuelto_.",
+        "Algunos verbos tienen dos participios. El irregular se prefiere como adjetivo y el regular en los tiempos compuestos, con variación según la zona: _impreso/imprimido, frito/freído, electo/elegido, provisto/proveído, preso/prendido_. En Argentina, Uruguay y Paraguay se usan _inscripto, descripto_."
+      ],
+      src: "RAE, Manual §4.6.2"
+    },
+    {
+      t: "Formas que la norma recomienda evitar",
+      ej: [
+        "*_dijistes, cantastes_ → _dijiste, cantaste_",
+        "*_márchensen, cállensen_ → _márchense, cállense_",
+        "*_pásemos, véngamos_ → _pasemos, vengamos_",
+        "*_dijieron, trajieron_ → _dijeron, trajeron_",
+        "*_Me apreta el zapato_ → _Me aprieta el zapato_",
+        "*_preveemos_ → _prevemos_"
+      ],
+      src: "RAE, Manual §4.2.3, §4.3.3, §4.4.3, §4.6.1"
+    }
+  ],
+  cards: [
+    { f: "Segmentá _cantábamos_", b: "_cant_ (raíz) + _á_ (VT) + _ba_ (TM) + _mos_ (PN)." },
+    { f: "¿Qué indica la vocal temática?", b: "La conjugación: _-a-_ 1.ª, _-e-_ 2.ª, _-i-_ 3.ª. No aporta significado." },
+    { f: "¿Qué conjugación es productiva?", b: "La 1.ª (_-ar_): reúne cerca del 90 % de los verbos y recibe los nuevos." },
+    { f: "Formas del tema de futuro", b: "Futuro (_amaré_), condicional (_amaría_) e infinitivo (_amar_)." },
+    { f: "_cantaba_ según Bello", b: "Copretérito." },
+    { f: "_cantaría_ según Bello", b: "Pospretérito." },
+    { f: "_había cantado_ según Bello", b: "Antecopretérito." },
+    { f: "_he cantado_ según Bello", b: "Antepresente." },
+    { f: "Imperativo voseante de _salir_, _decir_ y _venir_", b: "_salí, decí, vení_." },
+    { f: "Imperativo voseante de _ir_", b: "No tiene forma propia: se usa _andá_." },
+    { f: "¿Qué es un pretérito fuerte?", b: "Un pretérito con acento en la raíz en 1.ª y 3.ª del singular: _hice, hizo; pude, pudo_." },
+    { f: "Verbo supletivo", b: "Usa raíces distintas en su conjugación: _ir_ (_voy, fui, iba_), _ser_ (_soy, fui, era_)." },
+    { f: "Verbo defectivo", b: "Le faltan formas del paradigma: _soler, llover, balbucir_." },
+    { f: "Participio irregular de _romper_, _volver_ y _escribir_", b: "_roto, vuelto, escrito_." },
+    { f: "¿Cuál es correcta: _trajeron_ o _trajieron_?", b: "_Trajeron_. En los pretéritos de _decir, traer, conducir_ el diptongo se reduce a _-e-_." }
+  ],
+  quiz: [
+    { q: "En _mirabas_, ¿qué segmento es _-ba-_?", o: ["Vocal temática", "Tiempo-modo", "Persona-número", "Raíz"], a: 1, x: "_mir-a-ba-s_: _-ba-_ marca imperfecto de indicativo (TM)." },
+    { q: "¿Cómo llama Bello a _cantaría_?", o: ["Copretérito", "Pospretérito", "Antepresente", "Antefuturo"], a: 1, x: "Posterior a un pasado: pos-pretérito." },
+    { q: "Imperativo voseante de _comer_:", o: ["comé", "comed", "comés", "comas"], a: 0, x: "Acento final y sin _-d_: _comé_." },
+    { q: "¿Qué forma es correcta?", o: ["dijistes", "dijiste", "dijieron", "decí (pretérito)"], a: 1, x: "La 2.ª persona del pretérito no lleva _-s_: _dijiste_." },
+    { q: "¿Qué verbo tiene pretérito fuerte?", o: ["cantar", "poner", "vivir", "temer"], a: 1, x: "_puse, puso_: acento en la raíz." },
+    { q: "_agradezco_ muestra una irregularidad:", o: ["Vocálica", "Consonántica (epéntesis de /k/)", "Supletiva", "Defectiva"], a: 1, x: "Los verbos en _-ecer_ agregan /k/: _agradezco, agradezcas_." },
+    { q: "¿Cuál es un verbo supletivo?", o: ["ir", "pedir", "contar", "lucir"], a: 0, x: "_Ir_ usa tres raíces: _i-_ (iré), _v-_ (voy), _fu-_ (fui)." },
+    { q: "Futuro de _salir_:", o: ["saliré", "salré", "saldré", "salgo"], a: 2, x: "Se pierde la VT y se agrega una _d_ epentética: _sal-d-ré_." },
+    { q: "¿Qué formas pertenecen al tema de pretérito?", o: ["Presente de subjuntivo", "Futuro y condicional", "Imperfecto de subjuntivo y gerundio", "Imperativo"], a: 2, x: "Tema de pretérito: perfecto simple, imperfecto y futuro de subjuntivo, participio y gerundio." },
+    { q: "¿Cuál es la variante recomendada?", o: ["pásemos", "pasemos", "pasémonos", "pásamos"], a: 1, x: "En el presente de subjuntivo el acento pasa a la sílaba siguiente con _-mos_: _pasemos_." }
+  ]
+});
+
+/* Corchete · contenidos · Unidades 4 y 5 */
+CORCHETE.units.push({
+  id: "u4",
+  n: 4,
+  title: "Modificadores del núcleo verbal",
+  short: "Complementos",
+  blurb: "Complementos y adjuntos: OD, OI y dativos, régimen, agente, circunstanciales y predicativos.",
+  sources: ["PPT clase 27/8 (Vidal–Rojas)", "Di Tullio, Manual cap. VII", "Demonte (1999), cap. 38", "Ciapuscio y Ferrari §5.2–5.4.3"],
+  sections: [
+    {
+      t: "Complementos y adjuntos",
+      p: [
+        "Los **complementos** están ligados a la transitividad: los selecciona el verbo y reciben de él un papel temático. Los **adjuntos** no los selecciona el verbo: son más externos y omisibles.",
+        "Para distinguirlos, la cátedra propone ocho criterios:"
+      ],
+      k: [
+        "**Semántico**: los complementos son participantes; los adjuntos, circunstancias (tiempo, modo, lugar, causa…).",
+        "**Selección**: los verbos se clasifican por sus complementos, no por sus adjuntos.",
+        "**Obligatoriedad**: los adjuntos se omiten; los complementos no, con excepciones (_Estudiaron toda la noche_).",
+        "**Inserción**: un adjunto se agrega a casi cualquier verbo; un complemento, solo al verbo que lo pide.",
+        "**Sustitución**: verbo + complementos se reemplazan por _hacerlo_; los adjuntos quedan afuera.",
+        "**Orden**: los adjuntos se mueven con más libertad.",
+        "**Categoría**: los adjuntos son SP o SAdv; si son temporales, también SN (_el lunes_).",
+        "**Reconocimiento**: los complementos responden a pruebas (pronombre, pasiva, concordancia); algunos adjuntos se reemplazan por un adverbio de su clase."
+      ],
+      ej: [
+        "_Ayer mi madre cocinó pastas y hoy lo hizo mi suegra._ (_lo hizo_ = cocinó pastas)",
+        "_Esta tarde en su casa el inspector revisó atentamente la carta con lupa._",
+        "_*La carta el inspector revisó atentamente._"
+      ],
+      src: "PPT clase 27/8, diapositivas 6, 57 y 58"
+    },
+    {
+      t: "El objeto directo",
+      p: [
+        "Es el complemento de los verbos transitivos. Su papel típico es el paciente, pero también puede ser un objeto creado (_pintó un cuadro_) o un estímulo (_oyó el disparo_). Nunca es agente.",
+        "Se reconoce por estas pruebas:"
+      ],
+      k: [
+        "Se reemplaza por **lo, la, los, las**: _La leí_.",
+        "Pasa a ser **sujeto de la pasiva**: _La habitación aún no fue ordenada_.",
+        "Lleva **a** cuando designa una persona específica: _Necesito a mi secretario_ / _Necesito (un) secretario_.",
+        "En el Río de la Plata se duplica con el clítico, incluso con cosas: _¿Lo conocés a Carlos?_ _Al libro me lo devolviste ayer_."
+      ],
+      ej: [
+        "_Juan pesa 90 kg._ OD periférico: no admite pasiva (*_90 kg son pesados_) y se pregunta con _¿cuánto?_",
+        "_dar asco, tomar nota, prestar atención_: verbo soporte + sustantivo, funcionan como una unidad."
+      ],
+      src: "Di Tullio, cap. VII"
+    },
+    {
+      t: "El objeto indirecto y otros dativos",
+      p: [
+        "El clítico **le/les** cumple varias funciones, así que su presencia no alcanza para decir que hay OI.",
+        "El **objeto indirecto** va con _a_ y aparece con verbos ditransitivos: de transferencia (_dar, vender, devolver_), de comunicación (_decir, prometer_) y de influencia (_ordenar, pedir_). Ante _lo_ aparece _se_: _Juan se lo vendió_. No cambia en la pasiva."
+      ],
+      k: [
+        "**Dativo de interés**: con inacusativos como _gustar, faltar, importar_: _A María le faltan dos materias_.",
+        "**Benefactivo**: alterna con _para_ y es omisible: _María le tejió un chaleco a su nieto_ (= _para su nieto_).",
+        "**Posesivo**: marca al poseedor de una parte del cuerpo o algo personal: _Le afeitaron el bigote_, _Te lustré los zapatos_.",
+        "**Ético**: participación emocional, siempre omisible: _No te me duermas_, _Este chico no me come_."
+      ],
+      src: "Di Tullio, cap. VII (El dativo)"
+    },
+    {
+      t: "El complemento de régimen (CPR)",
+      p: [
+        "Es un SP encabezado por una **preposición vacía** que elige el verbo. Por eso es un argumento y, en general, no se puede omitir. Las preposiciones más frecuentes son _de, en, a, con_.",
+        "Se distingue del circunstancial porque la preposición no se puede cambiar por otra ni reemplazar el SP por un adverbio."
+      ],
+      k: [
+        "Algunos verbos admiten dos preposiciones: _participar de/en_, _incidir en/sobre_, pero no otras (_*participar a_).",
+        "Puede aparecer junto al OD: _No prives a tus hijos de la herencia_ (también _forzar, despojar_).",
+        "Cambiar la preposición puede cambiar el sentido: _Comenzó a llover / Comenzó por el segundo ejemplo / Comenzó con lo pendiente_."
+      ],
+      ej: [
+        "_El disertante abusó de la paciencia del público._",
+        "_El problema radica en la falta de insumos._",
+        "*_El problema radica._",
+        "_No te olvides del libro. / No te olvides._ (excepción: se puede omitir)"
+      ],
+      src: "PPT clase 27/8, diapositivas 10 a 12"
+    },
+    {
+      t: "El complemento agente",
+      p: [
+        "Aparece en la **voz pasiva**, encabezado por _por_, y corresponde al sujeto de la activa. Aunque es opcional, es un complemento porque recibe un papel temático del verbo.",
+        "No toda oración con OD se pasa bien a pasiva con agente: cuando el sujeto activo es una causa o fuerza, el resultado es forzado."
+      ],
+      ej: [
+        "_Juan leyó los libros._ → _Los libros fueron leídos por Juan._",
+        "_La piedra rompió la ventana._ → ?_La ventana fue rota por la piedra._",
+        "_Una tienda fue robada (por tres ladrones)._"
+      ],
+      src: "PPT clase 27/8, diapositivas 8 y 9"
+    },
+    {
+      t: "Complementos y adjuntos circunstanciales",
+      p: [
+        "Los **complementos circunstanciales** son argumentos: el verbo los pide. Se realizan como SP o SAdv.",
+        "Los **adjuntos circunstanciales** no los pide el verbo. Se clasifican por su significado: modo, lugar, tiempo, frecuencia, instrumento, compañía, cantidad, causa, fin. Pueden ser SP, SAdv o SN temporal."
+      ],
+      k: [
+        "**Locativo**: _Vive en Formosa / allí_.",
+        "**Origen**: _Vino de su casa / desde el trabajo_.",
+        "**Destino**: _Ana fue a la pieza / hasta la cama / allá_.",
+        "**Modo**: _Los chicos se portaron muy bien_; _La abuela trató afectuosamente a los chicos_."
+      ],
+      ej: [
+        "_Los niños festejarán mañana su día en el Paraíso de los Niños._",
+        "→ _Los niños festejarán entonces su día allí._ (reemplazo por adverbios de su clase)",
+        "_La disputa concluyó felizmente._ (adjunto del SV: se pusieron de acuerdo)",
+        "_La disputa concluyó, felizmente._ (modifica a toda la oración)"
+      ],
+      src: "PPT clase 27/8, diapositivas 7, 13 y 58"
+    },
+    {
+      t: "Los predicativos",
+      p: [
+        "Modifican a la vez al verbo y a un SN de la oración: al **sujeto** (predicativo subjetivo) o al **objeto directo** (predicativo objetivo). Concuerdan en género y número con ese SN y pueden ser **obligatorios** o **no obligatorios**.",
+        "Pueden ser SAdj (lo más típico), SN (_Considero a Beatriz mi amiga preferida_), SP con preposición liviana (_cantó en zapatillas_ = descalza) o SAdv (_El pescado huele bien_).",
+        "Los predicativos descriptivos son **predicados de estadio**: expresan propiedades transitorias, no permanentes."
+      ],
+      ej: [
+        "_Los sindicalistas estaban molestos._ (subjetivo obligatorio)",
+        "_Los sindicalistas protestaban molestos._ (subjetivo no obligatorio)",
+        "_Declararon vencedor al candidato oficialista._ (objetivo obligatorio)",
+        "_El mecánico entregó el auto reparado._ (= _Lo entregó reparado_)",
+        "*_Lo entregó rojo._ (_rojo_ es una propiedad permanente: modifica al nombre)",
+        "_Las aguas del Atlántico se mueven tumultuosas_ / *_azules_."
+      ],
+      src: "PPT clase 27/8, diapositivas 14 a 22 · Demonte, cap. 38"
+    },
+    {
+      t: "Predicativos adjuntos: casos y límites",
+      k: [
+        "**Resultativos**: expresan el resultado del proceso: _El carpintero lijó la madera suave_; _El ladrón limó las rejas hasta dejarlas frágiles_.",
+        "**De la manera o reiteración del estado final**: _Quiero los fideos bien sueltos_; _Planchá tu ropa bien planchadita_.",
+        "**Con OD o sujeto sin determinante no hay predicación secundaria**: _Salieron furiosos los estudiantes_ / *_Salieron furiosos estudiantes_.",
+        "**No confundir con el inciso**: en _La teoría, compleja y discutida, abrió un debate_ los adjetivos modifican al nombre.",
+        "**Dentro del SN**: si el núcleo es un nombre de evento, admite predicativo: _La llegada de los músicos borrachos_."
+      ],
+      src: "PPT clase 27/8, diapositivas 21 a 31"
+    },
+    {
+      t: "Predicativos seleccionados (obligatorios)",
+      p: [
+        "El verbo tiene un sentido incompleto que se cierra con el predicativo: juntos forman un **predicado complejo**. Si se omite, la oración falla o el verbo cambia de acepción (_La secretaria encontró el informe_ / _encontró el informe confuso_)."
+      ],
+      k: [
+        "**Epistémicos y declarativos**: _considerar, encontrar, estimar, juzgar, declarar_: _El jurado lo declaró inocente_.",
+        "**Designativos**: _nombrar, bautizar, apodar_; y con _como/de_: _describir como, tildar de_: _Lo tildan de soberbio_.",
+        "**Causativos**: _volver, poner, dejar, hacer_: _La maratón me dejó cansadísima_; _hizo añicos su corazón_.",
+        "**Tener**: con parte o posesión: _Tiene el cabello brillante y sedoso_.",
+        "**Dar/tomar por**: _Lo habían dado por muerto_.",
+        "**Pseudocopulativos**: _ponerse, volverse, quedar(se), hacerse, resultar, convertirse en_; _andar, ir, venir_; _seguir, continuar_; _verse, sentirse, lucir, sonar, oler, saber_. El predicativo no se reemplaza por _lo_: *_El niño lo sigue_.",
+        "**Con preposición**: _servir de/como, actuar de, hacer de_; _pecar de, aspirar a_: _El escritor peca de soberbio_."
+      ],
+      ej: [
+        "_Ana se puso triste al recibir la noticia._",
+        "_Con el tiempo, Pedro se volvió desconfiado._ / *_se puso desconfiado_",
+        "_La IA sirve de traductor._",
+        "_El paquete pesaba menos de un kilo._ (caso límite: verbos de medida)"
+      ],
+      src: "PPT clase 27/8, diapositivas 32 a 56 · Demonte, cap. 38"
+    }
+  ],
+  cards: [
+    { f: "Complemento vs. adjunto", b: "El complemento lo selecciona el verbo y recibe papel temático. El adjunto no es seleccionado, es más externo y omisible." },
+    { f: "Prueba de _hacerlo_", b: "Verbo + complementos se sustituyen por _hacerlo_; los adjuntos quedan fuera: _Ayer cocinó pastas y hoy lo hizo mi suegra_." },
+    { f: "Tres pruebas del objeto directo", b: "Se reemplaza por _lo/la/los/las_, pasa a sujeto de la pasiva y lleva _a_ si es persona específica." },
+    { f: "¿Cuándo el OD lleva _a_?", b: "Cuando designa una persona (o entidad personalizada) específica: _Necesito a mi secretario_." },
+    { f: "Verbos que llevan objeto indirecto", b: "Ditransitivos de transferencia (_dar, vender_), comunicación (_decir, prometer_) e influencia (_ordenar, pedir_)." },
+    { f: "Dativo benefactivo", b: "Alterna con _para_ y es omisible: _María le tejió un chaleco a su nieto_." },
+    { f: "Dativo posesivo", b: "Marca al poseedor de una parte del cuerpo o algo personal: _Le afeitaron el bigote_." },
+    { f: "Dativo ético", b: "Participación emocional del hablante, siempre omisible: _No te me duermas_." },
+    { f: "Dativo de interés", b: "Con inacusativos como _gustar, faltar, importar_: _A Juan le apasiona la música_." },
+    { f: "¿Qué es un complemento de régimen?", b: "Un SP con preposición vacía elegida por el verbo; es argumento: _abusar de, insistir en, radicar en_." },
+    { f: "¿Cómo se distingue el CPR del circunstancial?", b: "En el CPR la preposición es fija; el circunstancial admite varias preposiciones o un adverbio." },
+    { f: "Complemento agente", b: "SP con _por_ en la voz pasiva; corresponde al sujeto de la activa." },
+    { f: "Complemento circunstancial (argumental)", b: "Circunstancial pedido por el verbo: _Vive en Formosa_, _Se portaron bien_." },
+    { f: "Adjunto de SV vs. modificador oracional", b: "_Concluyó felizmente_ (modo del evento) / _Concluyó, felizmente_ (valoración de toda la oración)." },
+    { f: "Predicativo subjetivo obligatorio", b: "Con copulativos o pseudocopulativos: _Los sindicalistas estaban molestos_." },
+    { f: "Predicativo subjetivo no obligatorio", b: "Omisible, concuerda con el sujeto: _Los sindicalistas protestaban molestos_." },
+    { f: "Predicativo objetivo obligatorio", b: "Con verbos como _nombrar, declarar, considerar_: _Declararon vencedor al candidato_." },
+    { f: "¿Por qué _*Lo entregó rojo_ falla?", b: "Los predicativos son predicados de estadio (transitorios); _rojo_ es permanente y solo modifica al nombre." },
+    { f: "Predicativo resultativo", b: "Expresa el resultado del proceso: _El carpintero lijó la madera suave_." },
+    { f: "Prueba para los pseudocopulativos", b: "Su predicativo no se reemplaza por _lo_: _El niño sigue enfermo_ / *_El niño lo sigue_." }
+  ],
+  quiz: [
+    { q: "_El problema radica en la falta de insumos._ El SP es:", o: ["Complemento circunstancial", "Complemento de régimen", "Adjunto de lugar", "Objeto indirecto"], a: 1, x: "_Radicar_ elige la preposición _en_ y no se puede omitir: *_El problema radica_." },
+    { q: "_María le tejió un chaleco a su nieto._ _a su nieto_ es:", o: ["Objeto indirecto", "Dativo benefactivo", "Dativo posesivo", "Complemento de régimen"], a: 1, x: "Alterna con _para su nieto_ y es omisible: benefactivo. _Tejer_ no es ditransitivo." },
+    { q: "_Le afeitaron el bigote._ _Le_ es un dativo:", o: ["Ético", "De interés", "Posesivo", "Benefactivo"], a: 2, x: "Marca al poseedor de una parte del cuerpo." },
+    { q: "_No te me duermas._ _me_ es un dativo:", o: ["Ético", "Posesivo", "Objeto indirecto", "Reflexivo"], a: 0, x: "Indica participación emocional del hablante y es omisible." },
+    { q: "¿Qué oración tiene predicativo subjetivo NO obligatorio?", o: ["Los sindicalistas estaban molestos.", "Los sindicalistas protestaban molestos.", "Ana se puso triste.", "El niño sigue enfermo."], a: 1, x: "_Protestar_ no es copulativo: _molestos_ se puede omitir." },
+    { q: "_El jurado lo declaró inocente._ _inocente_ es:", o: ["Predicativo objetivo obligatorio", "Predicativo subjetivo", "Objeto directo", "Adjunto de modo"], a: 0, x: "_Declarar_ selecciona OD + predicativo, que concuerda con _lo_." },
+    { q: "¿Qué criterio NO sirve para separar complementos de adjuntos?", o: ["Sustitución por _hacerlo_", "Obligatoriedad", "Cantidad de palabras del constituyente", "Libertad de orden"], a: 2, x: "La extensión no dice nada sobre la selección." },
+    { q: "_La abuela trató afectuosamente a los chicos._ _afectuosamente_ es:", o: ["Adjunto de modo", "Complemento circunstancial de modo", "Predicativo subjetivo", "Modificador oracional"], a: 1, x: "_Tratar_ (en esta acepción) pide un complemento de modo: *_La abuela trató a los chicos_." },
+    { q: "¿Por qué _*Salieron furiosos estudiantes_ es agramatical?", o: ["_Furiosos_ no concuerda", "Un sujeto sin determinante no admite predicativo", "_Salir_ es transitivo", "Falta el complemento agente"], a: 1, x: "Los sujetos posverbales sin determinante no pueden ser sujetos de una predicación secundaria." },
+    { q: "_Lo habían dado por muerto._ _por muerto_ es:", o: ["Complemento agente", "Predicativo objetivo obligatorio", "Complemento de régimen", "Adjunto de causa"], a: 1, x: "Con _dar/tomar por_ el predicativo va introducido por preposición y se refiere al OD." },
+    { q: "_Juan pesa 90 kg._ Según Di Tullio, _90 kg_ es:", o: ["OD prototípico", "OD periférico", "Adjunto de cantidad", "Complemento agente"], a: 1, x: "Lo selecciona el verbo, pero no admite pasiva y se pregunta con _¿cuánto?_" },
+    { q: "¿Cuál es un verbo pseudocopulativo?", o: ["volverse", "comer", "dar", "confiar"], a: 0, x: "_Volverse_ exige un predicativo que no se reemplaza por _lo_: _Se volvió desconfiado_." }
+  ]
+});
+
+CORCHETE.units.push({
+  id: "u5",
+  n: 5,
+  title: "Perífrasis verbales",
+  short: "Perífrasis",
+  blurb: "Auxiliar y auxiliado, pruebas de reconocimiento, clases de perífrasis, frase verbal y locución.",
+  sources: ["PPT clases 24/9 y 1/10 (Rojas)", "Di Tullio, Manual cap. XIV", "Gómez Torrego (1999), cap. 51", "Yllera (1999), cap. 52"],
+  sections: [
+    {
+      t: "Qué es una perífrasis verbal",
+      p: [
+        "Es la unión de dos o más verbos que forman **un solo núcleo del predicado**: un verbo conjugado (**auxiliar**) y una forma no personal (**auxiliado** o principal): infinitivo, gerundio o participio.",
+        "El auxiliar lleva la información de número y persona y **pierde total o parcialmente su significado léxico** (se gramaticaliza). El auxiliado aporta el significado léxico y **selecciona los complementos**.",
+        "A veces hay un nexo entre ambos: _ir a, haber de, deber de, tener que_. Entre auxiliar y auxiliado pueden aparecer adverbios o circunstanciales: _Comenzó de repente a llover_."
+      ],
+      ej: [
+        "_Las invitaciones vienen costando cincuenta mil pesos._",
+        "_El alquiler va a costar muy caro._"
+      ],
+      src: "PPT clase 24/9, diapositivas 4 a 6"
+    },
+    {
+      t: "Pruebas de reconocimiento",
+      p: [
+        "Hay que averiguar la naturaleza de la forma no personal. Si solo tiene carga verbal, forma perífrasis. Si además tiene carga nominal (infinitivo), adjetival o adverbial (gerundio, participio), se subordina al verbo conjugado: es una secuencia de **verbo + oración no flexionada**."
+      ],
+      k: [
+        "**Obligatoriedad de la forma no flexiva** (la prueba central): en la perífrasis no se puede reemplazar por un SN, por _que_ + verbo conjugado ni por _lo_. _El papa desea viajar → desea un viaje / desea que viaje / lo desea_. Pero *_El papa lo puede_.",
+        "**Interrogación**: *_¿Qué suele Juan?_ frente a _¿Qué quiere Juan?_",
+        "**Sin estructura argumental**: el auxiliar no elige sujeto, así que funciona con impersonales: _Suele haber mucha gente_, _Va a llover_ / *_Piensa llover_.",
+        "**Pasiva**: _La Marsellesa suele ser cantada por Juan_ / *_quiere ser cantada_.",
+        "**Adjuntos y negación**: el auxiliar no tiene adjuntos propios: *_Ayer Juan debía salir hoy_ / _Ayer Juan propuso salir hoy_.",
+        "**Clíticos** (prueba negativa): si el clítico no puede subir al verbo conjugado, no hay perífrasis: *_El gerente se lo lamenta otorgar_."
+      ],
+      src: "Di Tullio, cap. XIV (pp. 245–251) · PPT clase 24/9, diapositivas 7 a 9"
+    },
+    {
+      t: "Frase verbal, perífrasis y locución",
+      p: [
+        "En esta cátedra se llama **frase verbal** solo a dos construcciones: los **tiempos compuestos** (_haber_ + participio invariable: _La sociedad ha desaparecido_) y la **frase verbal pasiva** (_ser_ + participio que concuerda con el sujeto: _El caudillo nunca fue reemplazado_).",
+        "La **locución verbal** es una unidad léxica fija con un verbo como centro. Equivale a un verbo simple y no admite cambios: _echar de menos_ (‘extrañar’), no *_echar de más_."
+      ],
+      ej: [
+        "Locuciones: _tomar el pelo, sacar canas verdes, meter la pata, dar la cara, ponerse al día_."
+      ],
+      src: "PPT clase 1/10, diapositivas 15 a 17"
+    },
+    {
+      t: "Perífrasis temporales y aspectuales",
+      p: [
+        "**Temporal**: _ir a_ + infinitivo expresa futuro: _Voy a ir al cine el domingo_.",
+        "Las **aspectuales** se refieren a la estructura interna del evento: su comienzo, su desarrollo o su final."
+      ],
+      table: {
+        head: ["Tipo", "Perífrasis", "Ejemplo"],
+        rows: [
+          ["Incoativa", "comenzar/empezar a, ponerse a, echar(se) a, romper a + inf.", "_Se echó a llorar_"],
+          ["Inminencial", "estar por, estar a punto de + inf.", "_Está por llover_"],
+          ["Continuativa", "estar, andar, seguir + ger.", "_Sigue lloviendo_"],
+          ["Terminativa", "terminar de, acabar de + inf.", "_Terminó de llover_"],
+          ["Resultativa", "llegar a + inf., tener + part.", "_Llegó a completar el circuito_"],
+          ["Reiterativa", "volver a + inf.", "_Volvió a llorar por él_"],
+          ["Habitual", "soler + inf.", "_Suele pasear de noche_"],
+          ["Cese", "dejar de + inf.", "_Tengo que dejar de fumar_"]
+        ]
+      },
+      src: "PPT clase 24/9, diapositiva 10 · Di Tullio, cap. XIV · Gómez Torrego §51.3.2"
+    },
+    {
+      t: "Perífrasis modales",
+      p: [
+        "Expresan modalidad. La **epistémica** evalúa qué tan probable es lo dicho; la **deóntica** habla de obligación, permiso, capacidad o intención del sujeto."
+      ],
+      k: [
+        "Epistémica, de menos a más certeza: posibilidad (_El riesgo país puede bajar_), probabilidad (_debe bajar_), certeza (_tiene que bajar, ha de bajar_).",
+        "Deóntica: obligación (_Juan debe ir_), permiso o capacidad (_Juan puede venir_).",
+        "La misma perífrasis puede ser de los dos tipos según el contexto: _Juan debe estar en casa porque está su bicicleta_ (epistémica) / _porque está castigado_ (deóntica).",
+        "Solo en sentido epistémico, _poder_ admite paráfrasis con _puede que_ y perfecto o negación: _Puede no haber venido Juan_.",
+        "**deber + inf.** se prefiere para la obligación; **deber de + inf.**, para la suposición: _Hay luz, así que Paloma debe de estar_."
+      ],
+      src: "PPT clase 1/10, diapositivas 11 a 13 · Di Tullio, cap. XIV"
+    },
+    {
+      t: "Perífrasis de gerundio",
+      p: [
+        "Presentan la acción en su desarrollo (aspecto cursivo). El gerundio determina la estructura argumental: el sujeto del auxiliar coincide con el del gerundio."
+      ],
+      k: [
+        "**estar + ger.**: acción en curso, sin implicar que culmine: _Alicia está telefoneando a su jefe_.",
+        "**ir + ger.**: progresión gradual hacia adelante: _Va mejorando de a poco_.",
+        "**venir + ger.**: acción que empezó antes y llega hasta el momento de referencia: _Vienen ejercitándose bastante bien_.",
+        "**andar + ger.**: aspecto cursivo con matiz modal: _Anda leyendo mucho_.",
+        "**llevar + ger.**: cuánto dura algo que empezó antes: _Lleva tres años estudiando_.",
+        "**seguir/continuar + ger.**: continuidad de algo que se esperaba que terminara: _Sigue pensando en eso_.",
+        "No es perífrasis si el gerundio es un circunstancial: _Se fue muy deprisa recordando lo que había escuchado_."
+      ],
+      src: "Yllera (1999) §52.1 · PPT clase 24/9"
+    },
+    {
+      t: "Perífrasis de participio",
+      p: [
+        "Expresan el **resultado** de un proceso (aspecto perfectivo-resultativo). El participio concuerda con el sujeto o con el OD."
+      ],
+      k: [
+        "Auxiliares intransitivos: **estar** (el más usado: _La puerta está cerrada_), **quedar**, **andar**, **ir**, **seguir**.",
+        "Auxiliares transitivos: **tener** (resultado con valor intensivo: _Ya tengo corregidos todos los parciales_), **llevar** (acumulativo: _Llevo escritas varias páginas_), **dejar**."
+      ],
+      src: "Yllera (1999) §52.2 · PPT clase 24/9"
+    },
+    {
+      t: "Ambigüedad: ¿auxiliar o verbo pleno?",
+      p: [
+        "Con verbos de movimiento hay dos lecturas posibles. Se resuelve pronominalizando el objeto: si el clítico sube al verbo conjugado, es auxiliar."
+      ],
+      ej: [
+        "_Juan la va a saludar._ (= la saludará: perífrasis)",
+        "_Juan va a Buenos Aires a saludarla._ (verbo de movimiento + finalidad)",
+        "_María la volvió a estudiar._ (= otra vez) / _María volvió a su casa a estudiarla._",
+        "_Pedro la sigue cantando._ (= continúa) / _Pedro sigue por la calle cantándola._"
+      ],
+      src: "Di Tullio, cap. XIV (p. 251)"
+    }
+  ],
+  cards: [
+    { f: "Definición de perífrasis verbal", b: "Dos o más verbos que forman un solo núcleo del predicado: auxiliar conjugado + auxiliado en forma no personal." },
+    { f: "¿Qué aporta el auxiliar?", b: "Número, persona y un valor gramatical (tiempo, modo o aspecto). Pierde su significado léxico." },
+    { f: "¿Qué aporta el auxiliado?", b: "El significado léxico y la selección de los complementos." },
+    { f: "Prueba central de Di Tullio", b: "Obligatoriedad de la forma no flexiva: en la perífrasis no se reemplaza por SN, _que_ + verbo ni _lo_ (*_Juan lo suele_)." },
+    { f: "Prueba de la interrogación", b: "*_¿Qué suele Juan?_ (perífrasis) frente a _¿Qué quiere Juan?_ (verbo + oración no flexionada)." },
+    { f: "¿Por qué _Suele haber mucha gente_ prueba que hay perífrasis?", b: "El auxiliar no tiene estructura argumental: se combina con un impersonal sin problema." },
+    { f: "¿Qué llama frase verbal la cátedra?", b: "Solo los tiempos compuestos (_haber_ + participio) y la pasiva (_ser_ + participio)." },
+    { f: "Locución verbal", b: "Unidad léxica fija, equivalente a un verbo simple, que no admite cambios: _echar de menos_." },
+    { f: "Perífrasis incoativa", b: "Marca el comienzo: _comenzar a, ponerse a, echarse a_ + infinitivo." },
+    { f: "Perífrasis inminencial", b: "El evento está por ocurrir: _estar por, estar a punto de_ + infinitivo." },
+    { f: "Perífrasis reiterativa", b: "_volver a_ + infinitivo: _Volvió a llorar_." },
+    { f: "Perífrasis habitual", b: "_soler_ + infinitivo: _Suele pasear de noche_." },
+    { f: "Modalidad epistémica vs. deóntica", b: "Epistémica: grado de probabilidad de lo dicho. Deóntica: obligación, permiso o capacidad del sujeto." },
+    { f: "_deber_ vs. _deber de_", b: "_deber_ + inf.: obligación. _deber de_ + inf.: suposición." },
+    { f: "_llevar_ + gerundio", b: "Duración de algo que empezó antes: _Lleva tres años estudiando_." },
+    { f: "_tener_ + participio", b: "Perífrasis resultativa; el participio concuerda con el OD: _Tengo corregidos los parciales_." },
+    { f: "¿Cómo se resuelve _Juan va a saludar a su abuela_?", b: "Pronominalizando: _Juan la va a saludar_ (perífrasis) / _va a … a saludarla_ (movimiento)." }
+  ],
+  quiz: [
+    { q: "¿En qué oración hay perífrasis?", o: ["Juan quiere cantar la Marsellesa.", "Juan suele cantar la Marsellesa.", "Juan promete cantar la Marsellesa.", "Juan dice cantar la Marsellesa."], a: 1, x: "*_Juan lo suele_, *_¿Qué suele Juan?_: el infinitivo es obligatorio." },
+    { q: "_El papa desea viajar a América._ ¿Por qué no hay perífrasis?", o: ["Porque hay una preposición", "Porque el infinitivo se reemplaza por _lo_: _lo desea_", "Porque _desear_ es irregular", "Porque falta el sujeto"], a: 1, x: "El infinitivo tiene carga nominal: es el OD de _desea_." },
+    { q: "_Los libros fueron leídos por Juan._ Según la cátedra, _fueron leídos_ es:", o: ["Perífrasis aspectual", "Frase verbal pasiva", "Locución verbal", "Verbo + oración no flexionada"], a: 1, x: "La cátedra reserva _frase verbal_ para tiempos compuestos y pasiva con _ser_." },
+    { q: "_echar de menos_ es:", o: ["Perífrasis incoativa", "Locución verbal", "Frase verbal", "Perífrasis modal"], a: 1, x: "Unidad fija que equivale a ‘extrañar’ y no admite cambios." },
+    { q: "_Está por llover._ La perífrasis es:", o: ["Incoativa", "Inminencial", "Terminativa", "Habitual"], a: 1, x: "El evento está a punto de ocurrir." },
+    { q: "_Juan debe estar en casa, porque está su bicicleta afuera._ Modalidad:", o: ["Deóntica", "Epistémica", "No hay modalidad", "Imperativa"], a: 1, x: "El hablante evalúa la probabilidad a partir de un indicio." },
+    { q: "¿Qué prueba es solo negativa (descarta, pero no confirma)?", o: ["Obligatoriedad de la forma no flexiva", "Interrogación", "Movimiento de clíticos", "Pasiva"], a: 2, x: "Verbos como _querer_ también permiten subir el clítico sin formar perífrasis." },
+    { q: "_Llevo escritas varias páginas._ ¿Con qué concuerda el participio?", o: ["Con el sujeto", "Con el OD _varias páginas_", "No concuerda", "Con el auxiliar"], a: 1, x: "En las perífrasis con auxiliares transitivos el participio concuerda con el OD." },
+    { q: "_Vienen ejercitándose bastante bien._ _venir_ + gerundio indica:", o: ["Acción futura", "Acción que empezó antes y llega hasta ahora", "Acción terminada", "Obligación"], a: 1, x: "Visión retrospectiva: se inicia antes y se prolonga hasta el momento de referencia." },
+    { q: "¿Cuál es incoativa?", o: ["volver a + inf.", "ponerse a + inf.", "soler + inf.", "acabar de + inf."], a: 1, x: "_Ponerse a_ marca el comienzo del evento." },
+    { q: "_Juan la va a saludar._ La subida del clítico indica que _ir_ es:", o: ["Verbo de movimiento", "Auxiliar", "Copulativo", "Pronominal"], a: 1, x: "Si el clítico sube al verbo conjugado, se favorece la lectura de auxiliar (futuro)." }
+  ]
+});
+
+/* Corchete · contenidos · Unidades 6 y 7 */
+CORCHETE.units.push({
+  id: "u6",
+  n: 6,
+  title: "Los valores de se",
+  short: "El se",
+  blurb: "Se pronombre, se que absorbe argumentos, se léxico y se estilístico: ocho valores y cómo reconocerlos.",
+  sources: ["Di Tullio, Manual cap. X (La polivalencia funcional del se)"],
+  sections: [
+    {
+      t: "Cómo ordenar los valores de se",
+      p: [
+        "El _se_ es uno de los temas más discutidos de la gramática porque tiene varios valores y muchas oraciones son ambiguas entre dos de ellos. Di Tullio los agrupa en cuatro familias:"
+      ],
+      k: [
+        "**I. Es un pronombre personal**: sustituto de _le_, reflexivo y recíproco.",
+        "**II. Absorbe un argumento del verbo**: intransitivizador, impersonal y pasivo.",
+        "**III. Es parte del lexema**: diacrítico e inherente.",
+        "**IV. Es estilístico**: se agrega sin cambiar la estructura."
+      ],
+      p2: "Casi todos forman **construcciones pronominales**: verbo + clítico que comparten persona y número (_me miré, te levantaste, se arrepintieron_). El único que no es el sustituto de _le_.",
+      src: "Di Tullio, cap. X"
+    },
+    {
+      t: "I. El se pronombre",
+      k: [
+        "**Sustituto** (variante de _le_): aparece delante de _lo, la, los, las_. _Juan le dio el libro a María → Juan se lo dio_.",
+        "**Reflexivo**: el sujeto hace la acción sobre sí mismo. Admite el refuerzo _a sí mismo_. Puede ser OD (_Juan se considera un genio_) u OI (_Silvia se cepilló los dientes_).",
+        "**Recíproco**: con sujeto plural, cada uno actúa sobre el otro. Admite _mutuamente_ o _el uno al otro_: _Juan y María se besaron_."
+      ],
+      ej: [
+        "_Pablo se lastimó la mano._ (lectura normal: daño accidental, no admite _a sí mismo_)",
+        "_María se hizo la permanente._ (causativo: hizo que se la hicieran)",
+        "_Juan y María se pelearon._ (falso recíproco: _se peleó con María_)"
+      ],
+      src: "Di Tullio, cap. X, I"
+    },
+    {
+      t: "II. El se que absorbe un argumento",
+      k: [
+        "**Intransitivizador (ergativo o anticausativo)**: desaparece la causa y el paciente pasa a sujeto. El proceso ocurre solo: _El calor derritió la nieve → La nieve se derritió_. También con verbos de cambio de posición: _Juan se levantó_ (no admite _a sí mismo_). Suele llevar dativo de interés: _Se me quemó el asado_.",
+        "**Impersonal**: supone un agente humano indefinido (‘alguien’, ‘la gente’) y no hay sujeto. Verbo siempre en 3.ª del singular. Va con cualquier verbo: _Aquí se trabaja demasiado_; _En este país no se persigue a los delincuentes_.",
+        "**Pasivo**: el paciente es sujeto y el verbo concuerda con él. Solo con transitivos: _Se venden departamentos_, _Se necesitan secretarios_."
+      ],
+      ej: [
+        "_Se cerró la puerta (para que no entraran moscas)._ → pasivo: hay un agente implícito",
+        "_La puerta se cerró (sola)._ → intransitivizador: proceso espontáneo",
+        "_Se vende un departamento._ → ambiguo entre impersonal y pasivo; el plural (_Se venden departamentos_) obliga a leer pasiva",
+        "*_Se denunciaron a los políticos corruptos._ (con _a_ personal corresponde el impersonal: _Se denunció a los políticos_)"
+      ],
+      src: "Di Tullio, cap. X, II (3 a 5)"
+    },
+    {
+      t: "III. El se léxico",
+      k: [
+        "**Diacrítico**: distingue dos verbos con significado y régimen distintos: _Juan acordó las condiciones / Juan se acordó de las condiciones_; _parecer / parecerse a_; _negar / negarse a_. A veces la diferencia es aspectual: _dormir / dormirse_.",
+        "**Inherente**: el verbo no existe sin _se_: _quejarse, arrepentirse, atreverse, jactarse, percatarse, dignarse, adueñarse_. Rechaza la transitividad: *_No lo dignaron_."
+      ],
+      src: "Di Tullio, cap. X, III (6 y 7)"
+    },
+    {
+      t: "IV. El se estilístico",
+      p: [
+        "Es **omisible**: se agrega sin cambiar la estructura del predicado. Exige un OD determinado, porque la acción tiene que estar delimitada.",
+        "En el habla rioplatense juvenil hay una variante que intensifica: _María se comió todo_ (= comió muchísimo)."
+      ],
+      ej: [
+        "_Juan se fumó veinte cigarrillos durante el examen._",
+        "*_Juan se fumó cigarrillos._",
+        "_María (se) comió (toda) la torta._"
+      ],
+      src: "Di Tullio, cap. X, IV (8)"
+    },
+    {
+      t: "Pruebas para clasificar el se",
+      k: [
+        "¿Está delante de _lo/la_ y reemplaza a _le_? → sustituto.",
+        "¿Admite _a sí mismo_? → reflexivo. ¿Admite _mutuamente_? → recíproco.",
+        "¿Existe el verbo sin _se_? Si no existe → inherente. Si existe con otro significado o régimen → diacrítico.",
+        "¿Se puede quitar sin cambiar nada y el OD está determinado? → estilístico.",
+        "¿Es **paradigmático** (aparece en todas las personas: _me, te, nos_)? El impersonal y el pasivo no lo son: solo 3.ª persona.",
+        "¿Hay sujeto con el que concuerda el verbo? Sí → pasivo o intransitivizador. No → impersonal.",
+        "¿Admite _para que…_ o _deliberadamente_? Sí → pasivo (hay agente). ¿Admite _solo/sola_? → intransitivizador."
+      ],
+      src: "Di Tullio, cap. X, ejercicio 3"
+    }
+  ],
+  cards: [
+    { f: "Cuatro familias del se (Di Tullio)", b: "I. Pronombre (sustituto, reflexivo, recíproco). II. Absorbe argumento (intransitivizador, impersonal, pasivo). III. Léxico (diacrítico, inherente). IV. Estilístico." },
+    { f: "Se sustituto", b: "Variante de _le_ delante de _lo, la, los, las_: _Se lo dio_. No forma construcción pronominal." },
+    { f: "Se reflexivo: prueba", b: "Admite _a sí mismo_: _Juan se considera un genio (a sí mismo)_." },
+    { f: "Se recíproco: prueba", b: "Admite _mutuamente / el uno al otro_ con sujeto plural: _Se besaron_." },
+    { f: "Se intransitivizador (ergativo)", b: "Desaparece la causa y el paciente pasa a sujeto: _La nieve se derritió_. Proceso espontáneo." },
+    { f: "Se impersonal", b: "Agente humano indefinido, sin sujeto, verbo en 3.ª singular: _Aquí se trabaja demasiado_." },
+    { f: "Se pasivo", b: "El paciente es sujeto y concuerda con el verbo: _Se venden departamentos_. Solo con transitivos." },
+    { f: "¿Cómo distinguir pasivo de ergativo?", b: "El pasivo admite _para que…_ o _deliberadamente_ (hay agente). El ergativo admite _solo_ (espontáneo)." },
+    { f: "Se diacrítico", b: "Distingue dos verbos: _acordar algo / acordarse de algo_." },
+    { f: "Se inherente", b: "El verbo no existe sin _se_: _quejarse, arrepentirse, atreverse_." },
+    { f: "Se estilístico", b: "Omisible, con OD determinado: _Se fumó veinte cigarrillos_ / *_Se fumó cigarrillos_." },
+    { f: "¿Qué se no son paradigmáticos?", b: "El impersonal y el pasivo: solo se dan en 3.ª persona." },
+    { f: "_Se me quemó el asado_", b: "Se intransitivizador + dativo de interés (_me_): el afectado no es responsable." }
+  ],
+  quiz: [
+    { q: "_Juan se lo dio._ El se es:", o: ["Reflexivo", "Sustituto de _le_", "Pasivo", "Estilístico"], a: 1, x: "Aparece delante de _lo_ y reemplaza al dativo _le_." },
+    { q: "_La nieve se derritió con el calor._ El se es:", o: ["Pasivo", "Impersonal", "Intransitivizador (ergativo)", "Reflexivo"], a: 2, x: "Forma anticausativa de _El calor derritió la nieve_: el paciente pasa a sujeto." },
+    { q: "_Se venden departamentos._ El se es:", o: ["Impersonal", "Pasivo", "Recíproco", "Inherente"], a: 1, x: "El verbo concuerda en plural con _departamentos_, que es el sujeto." },
+    { q: "_En este país no se persigue a los delincuentes._ El se es:", o: ["Pasivo", "Impersonal", "Recíproco", "Ergativo"], a: 1, x: "El OD lleva _a_ y el verbo queda en singular: no hay sujeto." },
+    { q: "_Juan se acordó de las condiciones._ El se es:", o: ["Diacrítico", "Inherente", "Reflexivo", "Estilístico"], a: 0, x: "_Acordar algo_ y _acordarse de algo_ son verbos distintos, con distinto régimen." },
+    { q: "_No se han percatado de sus derechos._ El se es:", o: ["Diacrítico", "Inherente", "Pasivo", "Sustituto"], a: 1, x: "_Percatar_ no existe sin _se_." },
+    { q: "_Juan se fumó veinte cigarrillos._ El se es:", o: ["Estilístico", "Reflexivo", "Pasivo", "Impersonal"], a: 0, x: "Es omisible y el OD está determinado." },
+    { q: "¿Por qué _*Se denunciaron a los políticos_ es agramatical?", o: ["Falta el agente", "Con _a_ personal es impersonal y el verbo debe ir en singular", "_Denunciar_ es inherente", "El se es estilístico"], a: 1, x: "El SN con _a_ es OD, no sujeto: _Se denunció a los políticos_." },
+    { q: "_Se cerró la puerta para que no entraran moscas._ El se es:", o: ["Ergativo", "Pasivo", "Reflexivo", "Diacrítico"], a: 1, x: "La final supone un agente, aunque implícito: se pasivo." },
+    { q: "¿Qué se admite el refuerzo _a sí mismo_?", o: ["Pasivo", "Reflexivo", "Ergativo", "Impersonal"], a: 1, x: "Solo el reflexivo: el sujeto es a la vez agente y afectado." }
+  ]
+});
+
+CORCHETE.units.push({
+  id: "u7",
+  n: 7,
+  title: "Oración compuesta y compleja",
+  short: "Proposiciones",
+  blurb: "Coordinación y subordinación: proposiciones sustantivas, relativas y adverbiales propias e impropias.",
+  sources: ["Ciapuscio, Giammatteo, Albano y Ferrari (2004), Proposiciones subordinadas", "Di Tullio, Manual caps. XVI–XIX"],
+  sections: [
+    {
+      t: "Proposición, coordinación y subordinación",
+      p: [
+        "Una **proposición** es una estructura predicativa que forma parte de una oración. Si las proposiciones están **coordinadas** (_y, ni, o, pero, sino_), la oración es **compuesta**. Si hay proposiciones **subordinadas**, la oración es **compleja**.",
+        "La subordinación tiene grados:"
+      ],
+      k: [
+        "**Inclusión**: la proposición es un constituyente requerido (sustantivas) o modifica a uno (relativas).",
+        "**Subordinación propiamente dicha**: adjunto no obligatorio del SV (adverbiales propias).",
+        "**Cosubordinación**: interdependencia entre principal y subordinada (adverbiales impropias)."
+      ],
+      ej: [
+        "_[Los investigadores seguían con la pesquisa] y [los familiares sugerían nuevas hipótesis]._ (compuesta)",
+        "_La corte dictaminó [que la ley es anticonstitucional]._ (compleja)"
+      ],
+      src: "Ciapuscio y otros, cap. I"
+    },
+    {
+      t: "Proposiciones sustantivas",
+      p: [
+        "Cumplen funciones propias del SN y son siempre **argumentales**: sujeto, OD, término de preposición. Se reemplazan por _eso_ o _lo_."
+      ],
+      k: [
+        "**Con _que_** (declarativas): _La corte dictaminó que la ley es anticonstitucional_ → _lo dictaminó_.",
+        "**Interrogativas indirectas totales, con _si_**: _Me preguntaron si había leído la nueva versión_.",
+        "**Interrogativas indirectas parciales, con qu-**: _Me preguntó dónde vivía_.",
+        "**Infinitivas**: _Juan desea viajar_ → _lo desea_."
+      ],
+      src: "Ciapuscio y otros, cap. I §2–3"
+    },
+    {
+      t: "Proposiciones relativas",
+      p: [
+        "Están encabezadas por un relativo: _que, el que, el cual, quien, cuyo, cuanto, donde, cuando, como_. El relativo introduce la proposición y además **cumple una función dentro de ella** (sujeto, OD, adjunto, término de preposición)."
+      ],
+      k: [
+        "**Especificativas**: sin pausa, forman grupo con el antecedente y restringen su referencia: _Los diputados que votaron afirmativamente se retiraron_ (solo esos).",
+        "**Explicativas**: entre comas, no alteran la referencia: _Los diputados, que votaron afirmativamente, se retiraron_ (todos).",
+        "**Libres**: sin antecedente; funcionan como SN o SAdv: _Los que no aprueben no ingresarán_; _Lo pintó como se lo habían indicado_."
+      ],
+      ej: [
+        "_Compré la novela que tanto me gustaba._ (_que_ = sujeto)",
+        "_Compré la novela que habías elegido._ (_que_ = OD)",
+        "_Compré la novela de la que te había hablado._ (_la que_ = término del SP pedido por _hablar_)"
+      ],
+      src: "Ciapuscio y otros, cap. II (Ferrari)"
+    },
+    {
+      t: "Adverbiales propias",
+      p: [
+        "**Locativas, temporales y modales**. Ubican el evento en el espacio o el tiempo o dicen cómo ocurre. Se pueden **reemplazar por un adverbio** de su clase (_allí, entonces, así_).",
+        "Muchas son, por su estructura, **relativas libres** encabezadas por _donde, cuando, como_, que cumplen función dentro de la proposición. Otras llevan nexos no relativos: _mientras, apenas, según_."
+      ],
+      ej: [
+        "_Llegó cuando no lo esperaba._ (= entonces)",
+        "_Voy a resolver el problema como me enseñaron._ (= así)",
+        "_Vive donde termina la calle._ (complemento: _vivir_ pide un locativo)"
+      ],
+      src: "Ciapuscio y otros, cap. IV §1 (Albano y Giammatteo)"
+    },
+    {
+      t: "Adverbiales impropias",
+      p: [
+        "**Causales, finales, condicionales y concesivas**. Expresan una relación lógica con la principal y equivalen a una coordinación: _Llegó tarde porque perdió el tren_ = _Perdió el tren y por eso llegó tarde_.",
+        "**No se reemplazan por un adverbio**, sino por un SP (_por el tren_). Sus nexos son conjunciones (_porque, para que, si, aunque_) que no cumplen función dentro de la proposición. La relación es de **cosubordinación**."
+      ],
+      k: [
+        "Modifican al **SV** (adjuntos): _Abrimos las ventanas porque el calor era insoportable_.",
+        "Modifican al **núcleo oracional**: _Si me lo explican bien, es posible que lo entienda_.",
+        "Modifican la **modalidad** (se puede reponer un verbo de decir): _Si no me equivoco, hoy es viernes_; _Aunque no lo creas, ya termina el mes_."
+      ],
+      p2: "Las **comparativas y consecutivas** (_tan… que, más… que_) forman un grupo aparte por su estructura más compleja.",
+      src: "Ciapuscio y otros, cap. IV §2"
+    }
+  ],
+  cards: [
+    { f: "Oración compuesta vs. compleja", b: "Compuesta: proposiciones coordinadas. Compleja: incluye proposiciones subordinadas." },
+    { f: "Tres grados de subordinación", b: "Inclusión (sustantivas, relativas), subordinación propiamente dicha (adverbiales propias) y cosubordinación (impropias)." },
+    { f: "Proposición sustantiva", b: "Cumple una función del SN (sujeto, OD, término) y es argumental. Se reemplaza por _eso_ o _lo_." },
+    { f: "Interrogativa indirecta total", b: "Sustantiva introducida por _si_: _Me preguntaron si había leído la nueva versión_." },
+    { f: "¿Qué hace el relativo además de introducir la proposición?", b: "Cumple una función dentro de ella: sujeto, OD, adjunto o término de preposición." },
+    { f: "Relativa especificativa", b: "Sin pausa, restringe la referencia del antecedente: _Los diputados que votaron…_ (solo esos)." },
+    { f: "Relativa explicativa", b: "Entre comas, no altera la referencia: _Los diputados, que votaron…,_ (todos)." },
+    { f: "Relativa libre", b: "Sin antecedente, funciona como SN o SAdv: _Los que no aprueben no ingresarán_." },
+    { f: "Adverbiales propias", b: "Locativas, temporales y modales. Se reemplazan por _allí, entonces, así_." },
+    { f: "Adverbiales impropias", b: "Causales, finales, condicionales y concesivas. No se reemplazan por adverbio; equivalen a una coordinación." },
+    { f: "Modificador de modalidad", b: "Adverbial impropia que se refiere al acto de decir: _Si no me equivoco, hoy es viernes_ (= digo que…)." },
+    { f: "¿Por qué _cuando_ es relativo en _Llegó cuando no lo esperaba_?", b: "Admite paráfrasis relativa (_en el momento en que…_) y es adjunto de tiempo de _esperaba_." }
+  ],
+  quiz: [
+    { q: "_Me preguntaron si había leído la nueva versión._ La proposición es:", o: ["Adverbial condicional", "Sustantiva (interrogativa indirecta total)", "Relativa libre", "Coordinada"], a: 1, x: "Es el OD de _preguntaron_ (_me lo preguntaron_). El _si_ no es condicional." },
+    { q: "_Los diputados, que votaron afirmativamente, se retiraron._ La relativa es:", o: ["Especificativa", "Explicativa", "Libre", "Sustantiva"], a: 1, x: "Va entre comas y no recorta el conjunto de diputados." },
+    { q: "_Los que no aprueben las materias no ingresarán._ La proposición es:", o: ["Relativa especificativa", "Relativa libre", "Adverbial condicional", "Relativa explicativa"], a: 1, x: "No tiene antecedente y funciona como SN sujeto." },
+    { q: "_Llegó tarde porque perdió el tren._ La subordinada es:", o: ["Adverbial propia", "Adverbial impropia causal", "Sustantiva", "Relativa"], a: 1, x: "No se reemplaza por un adverbio y equivale a _Perdió el tren y por eso llegó tarde_." },
+    { q: "¿Qué prueba separa las adverbiales propias de las impropias?", o: ["La pausa", "El reemplazo por un adverbio de su clase", "El modo del verbo", "La concordancia"], a: 1, x: "Las propias se reemplazan por _allí, entonces, así_; las impropias no." },
+    { q: "_Si no me equivoco, hoy es viernes._ La condicional modifica:", o: ["Al SV", "Al núcleo oracional", "A la modalidad", "Al sujeto"], a: 2, x: "Se refiere al acto de decir: _Si no me equivoco, digo que hoy es viernes_." },
+    { q: "_Compré la novela de la que te había hablado._ ¿Qué función cumple _la que_ dentro de la relativa?", o: ["Sujeto", "OD", "Término del SP pedido por _hablar_", "Adjunto de lugar"], a: 2, x: "_Hablar de algo_: la preposición pertenece a la relativa." },
+    { q: "Una oración con dos proposiciones unidas por _pero_ es:", o: ["Compleja", "Compuesta", "Simple", "Impersonal"], a: 1, x: "La coordinación forma oraciones compuestas." }
+  ]
+});
+
+/* Corchete · análisis guiado, paletas y árboles de decisión */
+
+/* Paletas de etiquetas. c = tono de resaltador (1–10). */
+CORCHETE.palettes = {
+  fun: {
+    name: "Funciones",
+    items: [
+      { id: "suj", ab: "Suj.", name: "Sujeto", c: 1 },
+      { id: "nv", ab: "NV", name: "Núcleo verbal", c: 2 },
+      { id: "od", ab: "OD", name: "Objeto directo", c: 3 },
+      { id: "oi", ab: "OI", name: "Objeto indirecto", c: 4 },
+      { id: "dat", ab: "Dat.", name: "Dativo no argumental", c: 5 },
+      { id: "cpr", ab: "CPR", name: "Complemento de régimen", c: 6 },
+      { id: "cag", ab: "C.Ag.", name: "Complemento agente", c: 7 },
+      { id: "cc", ab: "C.Circ.", name: "Complemento circunstancial", c: 8 },
+      { id: "adj", ab: "Adj.", name: "Adjunto circunstancial", c: 9 },
+      { id: "pso", ab: "Pvo.S", name: "Predicativo subjetivo", c: 10 },
+      { id: "pob", ab: "Pvo.O", name: "Predicativo objetivo", c: 11 },
+      { id: "mod", ab: "Mod.O", name: "Modificador oracional", c: 12 }
+    ]
+  },
+  prop: {
+    name: "Proposiciones",
+    items: [
+      { id: "psus", ab: "Sust.", name: "Sustantiva", c: 3 },
+      { id: "pesp", ab: "Rel.esp.", name: "Relativa especificativa", c: 1 },
+      { id: "pexp", ab: "Rel.expl.", name: "Relativa explicativa", c: 11 },
+      { id: "plib", ab: "Rel.libre", name: "Relativa libre", c: 6 },
+      { id: "apro", ab: "Adv.propia", name: "Adverbial propia", c: 8 },
+      { id: "aimp", ab: "Adv.impropia", name: "Adverbial impropia", c: 2 },
+      { id: "coor", ab: "Coord.", name: "Coordinada", c: 9 }
+    ]
+  },
+  se: {
+    name: "Valores de se",
+    items: [
+      { id: "sust", ab: "Sustituto", name: "Se sustituto de le", c: 9 },
+      { id: "refl", ab: "Reflexivo", name: "Se reflexivo", c: 1 },
+      { id: "reci", ab: "Recíproco", name: "Se recíproco", c: 11 },
+      { id: "erg", ab: "Intransit.", name: "Se intransitivizador (ergativo)", c: 3 },
+      { id: "imp", ab: "Impersonal", name: "Se impersonal", c: 4 },
+      { id: "pas", ab: "Pasivo", name: "Se pasivo", c: 7 },
+      { id: "dia", ab: "Diacrítico", name: "Se diacrítico", c: 6 },
+      { id: "inh", ab: "Inherente", name: "Se inherente", c: 2 },
+      { id: "est", ab: "Estilístico", name: "Se estilístico", c: 10 }
+    ]
+  },
+  vb: {
+    name: "Construcciones verbales",
+    items: [
+      { id: "perif", ab: "Perífrasis", name: "Perífrasis verbal", c: 2 },
+      { id: "sub", ab: "V + or. no flex.", name: "Verbo + oración no flexionada", c: 8 },
+      { id: "fv", ab: "Frase verbal", name: "Frase verbal (compuesto o pasiva)", c: 1 },
+      { id: "loc", ab: "Locución", name: "Locución verbal", c: 6 }
+    ]
+  }
+};
+
+/* Oraciones para analizar.
+   parts: [texto, respuesta (id o lista de ids aceptados) o null si no se etiqueta, explicación] */
+CORCHETE.analysis = [
+  /* Funciones · Unidad 4 */
+  { u: "u4", pal: "fun", src: "PPT 27/8 · Demonte", parts: [
+    ["Los científicos", "suj", "Concuerda con el verbo en 3.ª plural."],
+    ["consideran", "nv", ""],
+    ["al grafeno", "od", "Se reemplaza por _lo_: _Lo consideran extraordinariamente resistente_."],
+    ["extraordinariamente resistente", "pob", "Predicativo objetivo obligatorio: _considerar_ es epistémico y pide OD + predicativo."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8", parts: [
+    ["El caballo", "suj", ""],
+    ["avanzó", "nv", ""],
+    ["fatigado", "pso", "Predicativo subjetivo no obligatorio: concuerda con _el caballo_ y se puede omitir."],
+    ["durante toda la carrera", "adj", "Adjunto de tiempo: el verbo no lo pide."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8", parts: [
+    ["El disertante", "suj", ""],
+    ["abusó", "nv", ""],
+    ["de la paciencia del público", "cpr", "_Abusar_ elige la preposición _de_; no se cambia por otra ni por un adverbio."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8", parts: [
+    ["Los libros", "suj", "Sujeto paciente de la pasiva: concuerda con _fueron_."],
+    ["fueron leídos", "nv", "Frase verbal pasiva: _ser_ + participio."],
+    ["por Juan", "cag", "Complemento agente: corresponde al sujeto de la activa."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8", parts: [
+    ["Mi abuela", "suj", ""],
+    ["vive", "nv", ""],
+    ["en Formosa", "cc", "Complemento circunstancial locativo: _vivir_ lo pide (*_Mi abuela vive_ en este sentido)."],
+    ["desde 1980", "adj", "Adjunto de tiempo, omisible."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 6", parts: [
+    ["En la reunión de ayer", "adj", "Adjunto de lugar y tiempo."],
+    ["los estudiantes", "suj", ""],
+    ["explicaron", "nv", ""],
+    ["extensamente", "adj", "Adjunto de modo: no lo selecciona _explicar_."],
+    ["su propuesta", "od", "_La_ explicaron. Sin él la oración falla: *_Los estudiantes explicaron_."]
+  ]},
+  { u: "u4", pal: "fun", src: "Di Tullio, cap. VII", parts: [
+    ["Juan", "suj", ""],
+    ["le", "oi", "Clítico dativo que duplica al OI."],
+    ["vendió", "nv", ""],
+    ["el libro", "od", "_Se lo vendió_."],
+    ["a María", "oi", "OI de un verbo ditransitivo de transferencia."]
+  ]},
+  { u: "u4", pal: "fun", src: "Di Tullio, cap. VII", parts: [
+    ["María", "suj", ""],
+    ["le", "dat", "Duplica al benefactivo."],
+    ["tejió", "nv", ""],
+    ["un chaleco", "od", ""],
+    ["a su nieto", "dat", "Benefactivo: alterna con _para su nieto_. _Tejer_ no es ditransitivo."]
+  ]},
+  { u: "u4", pal: "fun", src: "Di Tullio, cap. VII", parts: [
+    ["A María", "dat", "Dativo de interés, con un verbo inacusativo (_faltar_). Di Tullio lo considera una variante del OI."],
+    ["le", "dat", ""],
+    ["faltan", "nv", ""],
+    ["dos materias", "suj", "Sujeto pospuesto: concuerda con _faltan_."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 14", parts: [
+    ["Los sindicalistas", "suj", ""],
+    ["estaban", "nv", ""],
+    ["molestos", "pso", "Predicativo subjetivo obligatorio: _estar_ es copulativo."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8", parts: [
+    ["El jurado", "suj", ""],
+    ["lo", "od", ""],
+    ["declaró", "nv", ""],
+    ["inocente", "pob", "Predicativo objetivo obligatorio: concuerda con _lo_; _declarar_ lo exige."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 27", parts: [
+    ["El carpintero", "suj", ""],
+    ["lijó", "nv", ""],
+    ["la madera", "od", ""],
+    ["suave", "pob", "Predicativo resultativo: expresa el resultado de lijar."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 13", parts: [
+    ["La disputa por la herencia", "suj", ""],
+    ["concluyó", "nv", ""],
+    ["felizmente", "adj", "Sin pausa modifica al SV: dice cómo concluyó (las partes se pusieron de acuerdo)."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 13", parts: [
+    ["Felizmente,", "mod", "Con pausa valora toda la oración: no dice cómo terminó la disputa."],
+    ["la disputa por la herencia", "suj", ""],
+    ["concluyó", "nv", ""]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 58", parts: [
+    ["Los niños", "suj", ""],
+    ["festejarán", "nv", ""],
+    ["mañana", "adj", "Adjunto de tiempo: se reemplaza por _entonces_."],
+    ["su día", "od", ""],
+    ["en el Paraíso de los Niños", "adj", "Adjunto de lugar: se reemplaza por _allí_."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 7", parts: [
+    ["La abuela", "suj", ""],
+    ["trató", "nv", ""],
+    ["afectuosamente", "cc", "Complemento de modo: en esta acepción, _tratar_ lo pide."],
+    ["a los chicos", "od", "_Los_ trató."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 32", parts: [
+    ["Ana", "suj", ""],
+    ["se puso", "nv", "Verbo pseudocopulativo de cambio de estado."],
+    ["triste", "pso", "Predicativo subjetivo obligatorio: *_Ana se puso_."],
+    ["al recibir la noticia", "adj", "Adjunto de tiempo (construcción de infinitivo)."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 53", parts: [
+    ["La inteligencia artificial", "suj", ""],
+    ["sirve", "nv", ""],
+    ["de traductor", "pso", "Predicativo obligatorio introducido por _de_ (alterna con _como_): denota rol."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 33", parts: [
+    ["La secretaria", "suj", ""],
+    ["encontró", "nv", ""],
+    ["el informe", "od", ""],
+    ["confuso", "pob", "Con predicativo, _encontrar_ significa ‘juzgar’: sin él, significa ‘hallar’."]
+  ]},
+  { u: "u4", pal: "fun", src: "PPT 27/8, diap. 12", parts: [
+    ["No prives", "nv", "Imperativo con sujeto tácito (vos)."],
+    ["a tus hijos", "od", "_No los prives_."],
+    ["de la herencia del abuelo", "cpr", "_Privar_ pide OD y CPR a la vez."]
+  ]},
+  { u: "u5", pal: "fun", src: "PPT 24/9", parts: [
+    ["Juan", "suj", ""],
+    ["tiene que presentar", "nv", "Perífrasis modal: un solo núcleo verbal."],
+    ["un trabajo final", "od", "Lo selecciona _presentar_, el auxiliado."]
+  ]},
+
+  /* Construcciones verbales · Unidad 5 */
+  { u: "u5", pal: "vb", src: "Di Tullio, cap. XIV", parts: [
+    ["Juan", null, ""],
+    ["suele cantar", "perif", "*_Juan lo suele_, *_¿Qué suele Juan?_: perífrasis habitual."],
+    ["la Marsellesa.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "Di Tullio, cap. XIV", parts: [
+    ["Juan", null, ""],
+    ["quiere cantar", "sub", "_Juan lo quiere_, _¿Qué quiere Juan?_: el infinitivo es el OD de _quiere_."],
+    ["la Marsellesa.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 24/9, diap. 9", parts: [
+    ["El papa", null, ""],
+    ["puede viajar", "perif", "*_El papa lo puede_: perífrasis modal."],
+    ["a América.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 24/9, diap. 9", parts: [
+    ["El papa", null, ""],
+    ["desea viajar", "sub", "_El papa lo desea_ / _desea un viaje_ / _desea que viaje_."],
+    ["a América.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 1/10, diap. 15", parts: [
+    ["Todos", null, ""],
+    ["habían pagado", "fv", "Tiempo compuesto: _haber_ + participio invariable."],
+    ["sus entradas.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 1/10, diap. 15", parts: [
+    ["Los griegos", null, ""],
+    ["fueron conquistados", "fv", "Frase verbal pasiva: _ser_ + participio concordado."],
+    ["por los romanos.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 1/10, diap. 16", parts: [
+    ["Los chicos", null, ""],
+    ["echan de menos", "loc", "Locución verbal: equivale a ‘extrañan’ y no admite cambios."],
+    ["a sus amigos.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 24/9, diap. 4", parts: [
+    ["Ya", null, ""],
+    ["llevo escritas", "perif", "Perífrasis de participio: el participio concuerda con el OD."],
+    ["varias páginas del informe.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 24/9, diap. 3", parts: [
+    ["Se", null, ""],
+    ["echó a llorar", "perif", "Perífrasis incoativa."],
+    ["en plena función teatral.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "Di Tullio, cap. XIV", parts: [
+    ["El gerente", null, ""],
+    ["lamenta otorgar", "sub", "El clítico no puede subir: *_se lo lamenta otorgar_. No hay reestructuración."],
+    ["el crédito.", null, ""]
+  ]},
+  { u: "u5", pal: "vb", src: "PPT 1/10, diap. 16", parts: [
+    ["En la oficina le", null, ""],
+    ["tomaron el pelo", "loc", "Locución verbal: ‘burlarse’."],
+    ["al pasante.", null, ""]
+  ]},
+
+  /* Se · Unidad 6 */
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Juan", null, ""], ["se", "sust", "Delante de _lo_ reemplaza a _le_: _le dio el libro_ → _se lo dio_."], ["lo dio.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Silvia", null, ""], ["se", "refl", "Reflexivo en función de OI: _se cepilló los dientes (a sí misma)_."], ["cepilló los dientes.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Juan y María", null, ""], ["se", "reci", "Admite _mutuamente_ / _el uno al otro_."], ["besaron.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["La nieve", null, ""], ["se", "erg", "Forma anticausativa de _El calor derritió la nieve_."], ["derritió con el calor.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Aquí", null, ""], ["se", "imp", "Sin sujeto, agente humano indefinido (‘la gente’)."], ["trabaja demasiado.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["", null, ""], ["Se", "pas", "_Departamentos_ es sujeto: el verbo concuerda en plural."], ["venden departamentos.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Juan", null, ""], ["se", "dia", "_Acordar algo_ ≠ _acordarse de algo_: cambian significado y régimen."], ["acordó de las condiciones.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["No", null, ""], ["se", "inh", "_Percatar_ no existe sin _se_."], ["han percatado aún de sus derechos.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Juan", null, ""], ["se", "est", "Omisible, con OD determinado (_veinte cigarrillos_)."], ["fumó veinte cigarrillos.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["", null, ""], ["Se", "pas", "La final supone un agente implícito."], ["cerró la puerta para que no entraran moscas.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["La puerta", null, ""], ["se", "erg", "Proceso espontáneo: admite _sola_."], ["cerró sola.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Juan", null, ""], ["se", "erg", "Cambio de posición: no admite _a sí mismo_."], ["levantó temprano.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["En este país no", null, ""], ["se", "imp", "El OD lleva _a_ y el verbo queda en singular."], ["persigue a los delincuentes.", null, ""]] },
+  { u: "u6", pal: "se", src: "Di Tullio, cap. X", parts: [["Los empleados no", null, ""], ["se", "inh", "_Dignarse_ es inherentemente pronominal."], ["dignaron saludar al jefe.", null, ""]] },
+
+  /* Proposiciones · Unidad 7 */
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["La corte dictaminó", null, ""], ["que la ley de pesificación es anticonstitucional", "psus", "OD de _dictaminó_: _lo dictaminó_."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["Los ahorristas", null, ""], ["que se habían reunido en tribunales", "pesp", "Sin pausa: restringe a los ahorristas que se reunieron."], ["festejaron el fallo.", null, ""]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. II", parts: [["Los diputados,", null, ""], ["que votaron afirmativamente,", "pexp", "Entre comas: se refiere a todos los diputados."], ["se retiraron de inmediato.", null, ""]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. II", parts: [["Los que no aprueben las materias", "plib", "Sin antecedente: funciona como SN sujeto."], ["no ingresarán a la universidad.", null, ""]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["La gobernadora se marchó", null, ""], ["cuando se hizo público el dictamen", "apro", "Temporal: se reemplaza por _entonces_."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["El gobierno intenta tranquilizar los ánimos", null, ""], ["porque teme una turbulencia social", "aimp", "Causal: no se reemplaza por un adverbio."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["Si la economía se mantiene calma,", "aimp", "Condicional: cosubordinación con la principal."], ["es posible", null, ""], ["que lleguemos a las elecciones de abril", "psus", "Sujeto de _es posible_: _eso es posible_."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["Los investigadores seguían con la pesquisa", "coor", ""], ["y", null, ""], ["los familiares sugerían nuevas hipótesis", "coor", "Dos proposiciones coordinadas por _y_: oración compuesta."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. I", parts: [["Me preguntaron", null, ""], ["si había leído la nueva versión", "psus", "Interrogativa indirecta total: OD de _preguntaron_."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. IV", parts: [["Dejé el mensaje", null, ""], ["donde me lo pediste", ["apro", "plib"], "Adverbial propia locativa (= _allí_). Por su estructura también es una relativa libre."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. IV", parts: [["Aunque me lo pidan,", "aimp", "Concesiva: equivale a _Me lo podrán pedir, pero…_"], ["no lo voy a hacer.", null, ""]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. II", parts: [["Donó al museo la pluma", null, ""], ["con la que solía escribir sus novelas", "pesp", "Restringe _la pluma_; _la que_ es término del SP (instrumento) dentro de la relativa."]] },
+  { u: "u7", pal: "prop", src: "Ciapuscio y otros, cap. IV", parts: [["Si no me equivoco,", "aimp", "Condicional que modifica la modalidad: _digo que hoy es viernes_."], ["hoy es viernes.", null, ""]] }
+];
+
+/* Árboles de decisión. Cada nodo: q (pregunta), h (ayuda), opts [{l, go}] o r (resultado). */
+CORCHETE.trees = [
+  {
+    id: "funcion",
+    title: "¿Qué función cumple?",
+    desc: "Para un constituyente del predicado: de OD a modificador oracional, en orden de pruebas.",
+    u: "u4",
+    start: "a",
+    nodes: {
+      a: { q: "¿Se puede reemplazar por _lo, la, los, las_?", h: "_Leí la novela → La leí._ Ojo: con _pesar, medir, costar_ la prueba falla.", opts: [{ l: "Sí", go: "od" }, { l: "No", go: "b" }] },
+      b: { q: "¿Se puede reemplazar o duplicar con _le, les_ (o _se_ delante de _lo_)?", h: "_Le vendió el libro a María._", opts: [{ l: "Sí", go: "dat" }, { l: "No", go: "c" }] },
+      dat: { q: "¿Qué tipo de verbo y de relación hay?", h: "El clítico dativo cumple varias funciones.", opts: [
+        { l: "Verbo ditransitivo: dar, vender, decir, pedir", go: "r_oi" },
+        { l: "Inacusativo como gustar, faltar, importar", go: "r_int" },
+        { l: "Alterna con _para_ y es omisible", go: "r_ben" },
+        { l: "Poseedor de una parte del cuerpo o algo personal", go: "r_pos" },
+        { l: "Clítico emocional (_me_), siempre omisible", go: "r_eti" }
+      ]},
+      c: { q: "¿Empieza con preposición?", opts: [{ l: "Sí", go: "d" }, { l: "No", go: "f" }] },
+      d: { q: "¿Es _por_ + quien hace la acción en una oración pasiva?", h: "_Los libros fueron leídos por Juan._", opts: [{ l: "Sí", go: "r_cag" }, { l: "No", go: "e" }] },
+      e: { q: "¿La preposición es fija, elegida por el verbo, y no se puede cambiar ni reemplazar por un adverbio?", h: "_abusar de, insistir en, radicar en, confiar en_", opts: [{ l: "Sí", go: "r_cpr" }, { l: "No", go: "f" }] },
+      f: { q: "¿Concuerda en género y número con el sujeto o el OD y dice algo de él?", h: "_Protestaban molestos._ _Lo declararon inocente._", opts: [{ l: "Sí, con el sujeto", go: "g" }, { l: "Sí, con el OD", go: "g2" }, { l: "No", go: "h" }] },
+      g: { q: "Si lo quitás, ¿la oración falla o el verbo cambia de sentido?", h: "Copulativos y pseudocopulativos: _ser, estar, ponerse, volverse, quedarse, seguir_.", opts: [{ l: "Sí", go: "r_pso_ob" }, { l: "No", go: "r_pso_no" }] },
+      g2: { q: "Si lo quitás, ¿la oración falla o el verbo cambia de sentido?", h: "_considerar, declarar, nombrar, volver, dejar_: _encontró el informe confuso_ / _encontró el informe_.", opts: [{ l: "Sí", go: "r_pob_ob" }, { l: "No", go: "r_pob_no" }] },
+      h: { q: "¿Lo pide el verbo? (sin él la oración queda incompleta)", h: "_Vive en Formosa. Se portaron muy bien. Ana fue a la pieza._", opts: [{ l: "Sí", go: "r_cc" }, { l: "No", go: "i" }] },
+      i: { q: "¿Afecta a toda la oración, va separado por pausa y valora lo dicho?", h: "_Felizmente, la disputa concluyó._", opts: [{ l: "Sí", go: "r_mod" }, { l: "No", go: "r_adj" }] },
+      od: { r: "Objeto directo", x: "Confirmalo con la pasiva (pasa a sujeto) y la _a_ ante persona específica. Si es un complemento de medida (_pesa 90 kg_), es un OD periférico." },
+      r_oi: { r: "Objeto indirecto", x: "Complemento de verbo ditransitivo, con _a_. Con OD pronominal aparece _se_: _Se lo vendió_." },
+      r_int: { r: "Dativo de interés", x: "Con inacusativos como _gustar, faltar_. Di Tullio lo considera una variante del OI." },
+      r_ben: { r: "Dativo benefactivo", x: "Alterna con _para_ y puede aparecer con casi cualquier verbo de acción: es un adjunto." },
+      r_pos: { r: "Dativo posesivo", x: "Marca al poseedor: _Le afeitaron el bigote_." },
+      r_eti: { r: "Dativo ético", x: "Participación emocional del hablante: _No te me duermas_." },
+      r_cag: { r: "Complemento agente", x: "Corresponde al sujeto de la oración activa." },
+      r_cpr: { r: "Complemento de régimen", x: "Argumento con preposición vacía, regida por el verbo." },
+      r_pso_ob: { r: "Predicativo subjetivo obligatorio", x: "Con copulativos o pseudocopulativos. Con estos últimos no se reemplaza por _lo_." },
+      r_pso_no: { r: "Predicativo subjetivo no obligatorio", x: "Predicado de estadio, omisible: _El caballo avanzó fatigado_." },
+      r_pob_ob: { r: "Predicativo objetivo obligatorio", x: "Seleccionado por verbos epistémicos, declarativos, designativos o causativos." },
+      r_pob_no: { r: "Predicativo objetivo no obligatorio", x: "Adjunto descriptivo o resultativo: _entregó el auto reparado_." },
+      r_cc: { r: "Complemento circunstancial", x: "Circunstancial seleccionado: locativo, de origen, de destino o de modo." },
+      r_mod: { r: "Modificador oracional", x: "No modifica al SV sino a toda la oración." },
+      r_adj: { r: "Adjunto circunstancial", x: "Omisible, no seleccionado. Clasificalo por su significado: tiempo, lugar, modo, causa, fin…" }
+    }
+  },
+  {
+    id: "perifrasis",
+    title: "¿Hay perífrasis?",
+    desc: "Las pruebas de Di Tullio y de la cátedra, paso a paso.",
+    u: "u5",
+    start: "a",
+    nodes: {
+      a: { q: "¿Hay un verbo conjugado seguido de infinitivo, gerundio o participio?", opts: [{ l: "Sí", go: "b" }, { l: "No", go: "r_no" }] },
+      b: { q: "¿Es _haber_ + participio invariable, o _ser_ + participio que concuerda con el sujeto?", h: "_Ha desaparecido. Fue reemplazado._", opts: [{ l: "Sí", go: "r_fv" }, { l: "No", go: "c" }] },
+      c: { q: "¿Es una expresión fija que equivale a un verbo simple y no admite cambios?", h: "_echar de menos, meter la pata, tomar el pelo_", opts: [{ l: "Sí", go: "r_loc" }, { l: "No", go: "d" }] },
+      d: { q: "Reemplazá la forma no personal por un SN, por _que_ + verbo conjugado o por _lo_. ¿Queda gramatical?", h: "_Juan lo desea_ ✓ · *_Juan lo suele_ ✗", opts: [{ l: "Sí", go: "r_sub" }, { l: "No", go: "e" }] },
+      e: { q: "Preguntá con _qué_ + verbo conjugado. ¿Es gramatical?", h: "*_¿Qué suele Juan?_ · _¿Qué quiere Juan?_", opts: [{ l: "Sí", go: "r_sub" }, { l: "No", go: "f" }] },
+      f: { q: "¿Funciona con un verbo impersonal y admite la pasiva?", h: "_Suele haber gente. Va a llover. La Marsellesa suele ser cantada._", opts: [{ l: "Sí", go: "r_perif" }, { l: "No / no estoy seguro", go: "g" }] },
+      g: { q: "¿Es un verbo de movimiento (_ir, volver, seguir, andar_) que puede tener sentido pleno?", h: "_Juan va a Buenos Aires a saludarla._", opts: [{ l: "Sí", go: "r_mov" }, { l: "No", go: "r_perif" }] },
+      r_no: { r: "No hay perífrasis", x: "Un solo verbo es el núcleo del predicado." },
+      r_fv: { r: "Frase verbal", x: "Tiempo compuesto o pasiva con _ser_. La cátedra reserva este nombre para esos dos casos." },
+      r_loc: { r: "Locución verbal", x: "Unidad léxica fija: no admite cambios sintagmáticos ni paradigmáticos." },
+      r_sub: { r: "Verbo + oración no flexionada", x: "La forma no personal tiene carga nominal: es complemento del verbo conjugado. Cada verbo es núcleo de una oración distinta." },
+      r_perif: { r: "Perífrasis verbal", x: "Un solo núcleo del predicado. Clasificala: temporal (_ir a_), aspectual (_comenzar a, estar por, volver a, soler, estar_ + ger.) o modal (_poder, deber, tener que, haber de_)." },
+      r_mov: { r: "Probá con un clítico", x: "Si el clítico sube al verbo conjugado (_Juan la va a saludar_), es perífrasis. Si no (_va a Buenos Aires a saludarla_), es un verbo de movimiento pleno." }
+    }
+  },
+  {
+    id: "se",
+    title: "¿Qué se es?",
+    desc: "Las pruebas de Di Tullio ordenadas para descartar de a una.",
+    u: "u6",
+    start: "a",
+    nodes: {
+      a: { q: "¿El _se_ está delante de _lo, la, los, las_ y reemplaza a _le_?", h: "_Juan se lo dio (a María)._", opts: [{ l: "Sí", go: "r_sust" }, { l: "No", go: "b" }] },
+      b: { q: "¿Existe el verbo sin _se_?", h: "_quejar_, _arrepentir_, _percatar_ no existen solos.", opts: [{ l: "No existe", go: "r_inh" }, { l: "Sí existe", go: "c" }] },
+      c: { q: "Sin _se_, ¿el verbo cambia de significado o de régimen?", h: "_acordar algo / acordarse de algo_; _negar / negarse a_", opts: [{ l: "Sí", go: "r_dia" }, { l: "No", go: "d" }] },
+      d: { q: "¿Admite _a sí mismo_?", h: "_Juan se considera un genio (a sí mismo)._", opts: [{ l: "Sí", go: "r_refl" }, { l: "No", go: "e" }] },
+      e: { q: "Con sujeto plural, ¿admite _mutuamente_ o _el uno al otro_?", opts: [{ l: "Sí", go: "r_reci" }, { l: "No", go: "f" }] },
+      f: { q: "¿Se puede quitar sin cambiar nada, y el OD está determinado?", h: "_Juan (se) fumó veinte cigarrillos._", opts: [{ l: "Sí", go: "r_est" }, { l: "No", go: "g" }] },
+      g: { q: "¿Hay un sujeto con el que concuerda el verbo?", h: "_Se venden casas_ (sí) · _Se trabaja mucho_ (no)", opts: [{ l: "Sí", go: "h" }, { l: "No", go: "r_imp" }] },
+      h: { q: "¿Admite _para que…_ o _deliberadamente_ (hay un agente implícito)?", h: "_Se hundió el barco para cobrar el seguro._", opts: [{ l: "Sí", go: "r_pas" }, { l: "No: ocurre solo", go: "r_erg" }] },
+      r_sust: { r: "Se sustituto", x: "Variante de _le_ ante clítico acusativo. No forma construcción pronominal." },
+      r_inh: { r: "Se inherente", x: "Forma parte del verbo y rechaza la transitividad." },
+      r_dia: { r: "Se diacrítico", x: "Distingue dos verbos con distinto significado o régimen." },
+      r_refl: { r: "Se reflexivo", x: "El sujeto es agente y afectado. Puede ser OD u OI." },
+      r_reci: { r: "Se recíproco", x: "Cada uno actúa sobre el otro." },
+      r_est: { r: "Se estilístico", x: "Omisible; exige una acción delimitada." },
+      r_imp: { r: "Se impersonal", x: "Agente humano indefinido; verbo en 3.ª del singular. Si hay OD de persona, lleva _a_." },
+      r_pas: { r: "Se pasivo", x: "El paciente es sujeto; solo con verbos transitivos." },
+      r_erg: { r: "Se intransitivizador", x: "Ergativo o anticausativo: proceso espontáneo, admite _solo_. También los cambios de posición: _se levantó_." }
+    }
+  },
+  {
+    id: "proposicion",
+    title: "¿Qué proposición es?",
+    desc: "Coordinada, sustantiva, relativa o adverbial, según Ciapuscio y otros.",
+    u: "u7",
+    start: "a",
+    nodes: {
+      a: { q: "¿Está unida a otra del mismo nivel por _y, ni, o, pero, sino_?", opts: [{ l: "Sí", go: "r_coor" }, { l: "No", go: "b" }] },
+      b: { q: "¿Se puede reemplazar por _eso_ o _lo_ (es sujeto, OD o término)?", h: "_Dictaminó que la ley es inconstitucional → Lo dictaminó._", opts: [{ l: "Sí", go: "r_sus" }, { l: "No", go: "c" }] },
+      c: { q: "¿Empieza con un relativo (_que, quien, el cual, cuyo_) que tiene un antecedente delante?", opts: [{ l: "Sí", go: "d" }, { l: "No", go: "e" }] },
+      d: { q: "¿Va entre comas?", opts: [{ l: "Sí", go: "r_exp" }, { l: "No", go: "r_esp" }] },
+      e: { q: "¿Se puede reemplazar por _allí, entonces_ o _así_?", h: "_Llegó cuando no lo esperaba → Llegó entonces._", opts: [{ l: "Sí", go: "r_apro" }, { l: "No", go: "f" }] },
+      f: { q: "¿Expresa causa, fin, condición o concesión (_porque, para que, si, aunque_)?", opts: [{ l: "Sí", go: "r_aimp" }, { l: "No", go: "g" }] },
+      g: { q: "¿Empieza con un relativo sin antecedente (_los que, quien, lo que_)?", opts: [{ l: "Sí", go: "r_lib" }, { l: "No", go: "r_comp" }] },
+      r_coor: { r: "Proposición coordinada", x: "La oración es compuesta." },
+      r_sus: { r: "Proposición sustantiva", x: "Argumental. Puede ir con _que_, con _si_ (interrogativa total), con qu- (parcial) o en infinitivo." },
+      r_exp: { r: "Relativa explicativa", x: "No restringe la referencia del antecedente." },
+      r_esp: { r: "Relativa especificativa", x: "Restringe la referencia del antecedente." },
+      r_apro: { r: "Adverbial propia", x: "Locativa, temporal o modal. Si la encabeza _donde, cuando_ o _como_, estructuralmente es una relativa libre." },
+      r_aimp: { r: "Adverbial impropia", x: "Cosubordinación. Fijate si modifica al SV, al núcleo oracional o a la modalidad." },
+      r_lib: { r: "Relativa libre", x: "Funciona como SN o SAdv." },
+      r_comp: { r: "Revisá comparativas y consecutivas", x: "_tan… que, más… que_: forman un grupo aparte." }
+    }
+  }
+];
+
+</script>
+<script>
+/* Corchete · lógica de la app (vanilla JS, sin dependencias) */
+(function () {
+  "use strict";
+  var D = window.CORCHETE;
+  var KEY = "corchete.v1";
+  var VERSION = 1;
+
+  /* ---------- Estado persistente ---------- */
+  var defaults = { version: VERSION, theme: "system", unit: "u1", cards: {}, best: {}, hist: [], an: {} };
+  var S = load();
+  var saveWarned = false;
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return clone(defaults);
+      var s = JSON.parse(raw);
+      if (!s || s.version !== VERSION) return clone(defaults);
+      for (var k in defaults) if (!(k in s)) s[k] = clone(defaults[k]);
+      return s;
+    } catch (e) { return clone(defaults); }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(S)); return true; }
+    catch (e) {
+      if (!saveWarned) { toast("No se pudo guardar el progreso en este navegador."); saveWarned = true; }
+      return false;
+    }
+  }
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+  /* ---------- Utilidades ---------- */
+  function $(sel, el) { return (el || document).querySelector(sel); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function fmt(s) {
+    return esc(s)
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/_([^_]+)_/g, "<em>$1</em>");
+  }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function unitById(id) { for (var i = 0; i < D.units.length; i++) if (D.units[i].id === id) return D.units[i]; return D.units[0]; }
+  function palItem(pal, id) { var it = D.palettes[pal].items; for (var i = 0; i < it.length; i++) if (it[i].id === id) return it[i]; return null; }
+  function accepts(ans, id) { return Array.isArray(ans) ? ans.indexOf(id) > -1 : ans === id; }
+  function firstAns(ans) { return Array.isArray(ans) ? ans[0] : ans; }
+  function toast(msg) {
+    var t = $("#toast"); t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove("show"); }, 2600);
+  }
+  function tag(it) { return '<span class="tag" data-c="' + it.c + '">' + esc(it.ab) + "</span>"; }
+
+  /* ---------- Tema ---------- */
+  var THEMES = ["system", "light", "dark"];
+  var THEME_LABEL = { system: "Tema: sistema", light: "Tema: cuaderno", dark: "Tema: pizarrón" };
+  function applyTheme() {
+    var r = document.documentElement;
+    if (S.theme === "system") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", S.theme);
+    var btns = document.querySelectorAll("[data-theme-btn]");
+    for (var i = 0; i < btns.length; i++) btns[i].textContent = THEME_LABEL[S.theme];
+  }
+  function cycleTheme() { S.theme = THEMES[(THEMES.indexOf(S.theme) + 1) % 3]; applyTheme(); save(); }
+
+  /* ---------- Navegación ---------- */
+  var VIEWS = ["inicio", "apuntes", "analizar", "pruebas", "fichas", "practica"];
+  var ICONS = {
+    inicio: '<path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
+    apuntes: '<path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M9 3v18M12 8h4M12 12h4"/>',
+    analizar: '<path d="M7 5H4v14h3M17 5h3v14h-3"/><path d="M9 12h6"/>',
+    pruebas: '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="6" cy="18" r="2"/><path d="M8 6h4a4 4 0 0 1 4 4M8 18h4a4 4 0 0 0 4-4"/>',
+    fichas: '<rect x="3" y="7" width="14" height="12" rx="2"/><path d="M7 4h12a2 2 0 0 1 2 2v10"/>',
+    practica: '<path d="M9 11l2 2 4-4"/><rect x="4" y="4" width="16" height="16" rx="3"/>'
+  };
+  var LABELS = { inicio: "Inicio", apuntes: "Apuntes", analizar: "Analizar", pruebas: "Pruebas", fichas: "Fichas", practica: "Práctica" };
+
+  function navHTML() {
+    return VIEWS.map(function (v) {
+      return '<button class="navbtn" data-go="' + v + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[v] + "</svg><span>" + LABELS[v] + "</span></button>";
+    }).join("");
+  }
+  function current() { var h = location.hash.replace("#", ""); return VIEWS.indexOf(h) > -1 ? h : "inicio"; }
+  function go(v) { if (location.hash !== "#" + v) location.hash = v; else render(); }
+
+  function render() {
+    var v = current();
+    var btns = document.querySelectorAll(".navbtn");
+    for (var i = 0; i < btns.length; i++) {
+      if (btns[i].getAttribute("data-go") === v) btns[i].setAttribute("aria-current", "page"); else btns[i].removeAttribute("aria-current");
+    }
+    /* Se reemplaza el contenedor para descartar los listeners de la vista anterior. */
+    var old = $("#view"), el = old.cloneNode(false);
+    old.parentNode.replaceChild(el, old);
+    el.innerHTML = RENDER[v]();
+    if (AFTER[v]) AFTER[v](el);
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Progreso ---------- */
+  function cardKey(u, i) { return u + ":" + i; }
+  function unitProgress(u) {
+    var n = u.cards.length, done = 0;
+    for (var i = 0; i < n; i++) if ((S.cards[cardKey(u.id, i)] || 0) >= 2) done++;
+    return { n: n, done: done, pct: n ? Math.round(done * 100 / n) : 0 };
+  }
+  function pendingCount(uid) {
+    var c = 0;
+    D.units.forEach(function (u) {
+      if (uid && u.id !== uid) return;
+      u.cards.forEach(function (_, i) { if ((S.cards[cardKey(u.id, i)] || 0) < 2) c++; });
+    });
+    return c;
+  }
+
+  /* ---------- Render de una oración analizada ---------- */
+  function sentenceHTML(item, opts) {
+    opts = opts || {};
+    return '<div class="sentence">' + item.parts.map(function (p, i) {
+      if (!p[0]) return "";
+      if (p[1] === null) return '<span class="plain">' + fmt(p[0]) + "</span>";
+      var shown = opts.labels ? opts.labels[i] : null;
+      var it = shown ? palItem(item.pal, shown) : null;
+      var cls = "cons";
+      var fix = "";
+      if (opts.checked) {
+        var ok = accepts(p[1], shown);
+        cls += ok ? " is-ok" : " is-bad";
+        if (!ok) fix = '<span class="cons__fix">→ ' + esc(palItem(item.pal, firstAns(p[1])).ab) + "</span>";
+      }
+      if (opts.active === i) cls += " is-active";
+      var inner = '<span class="cons__text">' + fmt(p[0]) + '</span><span class="cons__label">' + (it ? tag(it) : "") + fix + "</span>";
+      var c = it ? ' data-c="' + it.c + '"' : "";
+      if (opts.interactive) return '<button type="button" class="' + cls + '"' + c + ' data-part="' + i + '" aria-label="' + esc(p[0].replace(/_/g, "")) + (it ? ": " + esc(it.name) : ": sin etiquetar") + '">' + inner + "</button>";
+      return '<span class="' + cls + '"' + c + ">" + inner + "</span>";
+    }).join("") + "</div>";
+  }
+
+  /* ================= INICIO ================= */
+  function dailyItem() {
+    var fun = D.analysis.filter(function (a) { return a.pal === "fun"; });
+    var day = Math.floor(Date.now() / 86400000);
+    return fun[day % fun.length];
+  }
+  function viewInicio() {
+    var item = dailyItem();
+    var labels = item.parts.map(function (p) { return p[1] === null ? null : firstAns(p[1]); });
+    var pend = pendingCount();
+    var h = '<header class="pagehead"><span class="eyebrow">Gramática 2025 · Profesorado en Letras · UNaF</span>' +
+      "<h1>Cuaderno de análisis</h1>" +
+      '<p class="lede">Apuntes, análisis guiado, pruebas de reconocimiento, fichas y práctica, todo con la bibliografía de la cátedra.</p></header>';
+
+    h += '<section class="hero" aria-labelledby="od-title"><span class="eyebrow" id="od-title">Oración del día</span>' +
+      sentenceHTML(item, { labels: labels }) +
+      '<div class="hero__foot"><span class="src">' + esc(item.src) + '</span><button class="btn btn--primary" data-go="analizar">Analizar oraciones</button></div></section>';
+
+    h += '<section class="quick" aria-label="Accesos rápidos">' +
+      '<button data-go="fichas"><strong>Repasar fichas</strong><span>' + pend + " pendientes de " + D.units.reduce(function (a, u) { return a + u.cards.length; }, 0) + "</span></button>" +
+      '<button data-sim="1"><strong>Simulacro de 10 preguntas</strong><span>Todas las unidades, con cronómetro</span></button>' +
+      '<button data-tree="se"><strong>¿Qué se es?</strong><span>Árbol de decisión de Di Tullio</span></button>' +
+      "</section>";
+
+    h += '<section><h2 class="section-title">Unidades <span class="muted small">fichas dominadas · mejor práctica</span></h2><ul class="units">' +
+      D.units.map(function (u) {
+        var p = unitProgress(u);
+        var best = S.best[u.id];
+        return '<li><button class="unitrow" data-unit="' + u.id + '"><span class="unitrow__n">' + u.n + '</span><span><span class="unitrow__title">' + esc(u.title) +
+          '</span><br><span class="unitrow__meta">' + esc(u.blurb) + '</span></span><span class="unitrow__score"><span class="meter" aria-hidden="true"><i style="width:' + p.pct + '%"></i></span>' +
+          p.done + "/" + p.n + " · " + (best != null ? best + "%" : "—") + "</span></button></li>";
+      }).join("") + "</ul></section>";
+
+    if (S.hist.length) {
+      h += '<section><h2 class="section-title">Últimas prácticas</h2><ul class="history">' +
+        S.hist.slice(-5).reverse().map(function (r) {
+          var name = r.u === "mix" ? "Todas las unidades" : unitById(r.u).title;
+          return "<li><span>" + esc(name) + ' <span class="muted">· ' + (r.m === "sim" ? "simulacro" : "práctica") + "</span></span><span>" + r.s + "/" + r.n + "</span></li>";
+        }).join("") + "</ul></section>";
+    }
+    return h;
+  }
+  function afterInicio(el) {
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.unit) { S.unit = b.dataset.unit; save(); go("apuntes"); }
+      else if (b.dataset.sim) { PR = { u: "mix", m: "sim" }; startQuiz(); go("practica"); }
+      else if (b.dataset.tree) { TR = { id: b.dataset.tree, path: [] }; go("pruebas"); }
+    });
+  }
+
+  /* ================= APUNTES ================= */
+  function unitChips(active, withAll) {
+    return '<div class="chips" role="group" aria-label="Unidad">' + (withAll ? '<button class="chip" data-u="all" aria-pressed="' + (active === "all") + '">Todas</button>' : "") +
+      D.units.map(function (u) { return '<button class="chip" data-u="' + u.id + '" aria-pressed="' + (active === u.id) + '"><b>' + u.n + "</b>" + esc(u.short) + "</button>"; }).join("") + "</div>";
+  }
+  function viewApuntes() {
+    var u = unitById(S.unit);
+    var h = unitChips(u.id);
+    h += '<header class="unithead"><h1><small>UNIDAD ' + u.n + "</small>" + esc(u.title) + '</h1><p class="lede">' + esc(u.blurb) + '</p><ul class="sources">' +
+      u.sources.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></header>";
+    h += '<ol class="toc">' + u.sections.map(function (s, i) { return '<li><a href="#apuntes" data-sec="' + i + '">' + esc(s.t) + "</a></li>"; }).join("") + "</ol>";
+    h += u.sections.map(function (s, i) {
+      var b = '<article class="note" id="sec-' + i + '"><h2>' + esc(s.t) + "</h2>";
+      (s.p || []).forEach(function (p) { b += "<p>" + fmt(p) + "</p>"; });
+      if (s.k) b += "<ul>" + s.k.map(function (k) { return "<li>" + fmt(k) + "</li>"; }).join("") + "</ul>";
+      if (s.p2) b += "<p>" + fmt(s.p2) + "</p>";
+      if (s.table) {
+        b += '<div class="tablewrap"><table><thead><tr>' + s.table.head.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+          s.table.rows.map(function (r) { return "<tr>" + r.map(function (c) { return "<td>" + fmt(c) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+      }
+      if (s.ej) b += '<ul class="examples">' + s.ej.map(function (e) {
+        var bad = e.charAt(0) === "*";
+        return "<li" + (bad ? ' class="bad"' : "") + ">" + fmt(bad ? e.slice(1) : e) + "</li>";
+      }).join("") + "</ul>";
+      if (s.src) b += '<span class="src">' + esc(s.src) + "</span>";
+      return b + "</article>";
+    }).join("");
+    var hasTree = D.trees.filter(function (t) { return t.u === u.id; })[0];
+    h += '<div class="btnrow"><button class="btn btn--primary" data-act="quiz">Practicar esta unidad</button><button class="btn" data-act="cards">Fichas de esta unidad</button>' +
+      (hasTree ? '<button class="btn" data-act="tree" data-id="' + hasTree.id + '">' + esc(hasTree.title) + "</button>" : "") + "</div>";
+    return h;
+  }
+  function afterApuntes(el) {
+    el.addEventListener("click", function (e) {
+      var a = e.target.closest("[data-sec]");
+      if (a) { e.preventDefault(); var t = $("#sec-" + a.dataset.sec); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+      var b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.u) { S.unit = b.dataset.u; save(); render(); }
+      else if (b.dataset.act === "quiz") { PR = { u: S.unit, m: "prac" }; startQuiz(); go("practica"); }
+      else if (b.dataset.act === "cards") { FC = { u: S.unit, queue: null }; go("fichas"); }
+      else if (b.dataset.act === "tree") { TR = { id: b.dataset.id, path: [] }; go("pruebas"); }
+    });
+  }
+
+  /* ================= ANALIZAR ================= */
+  var AN = { filter: "all", idx: 0, labels: {}, active: null, checked: false };
+  var AN_FILTERS = [["all", "Todas"], ["fun", "Funciones"], ["vb", "Construcciones verbales"], ["se", "Valores de se"], ["prop", "Proposiciones"]];
+  function anList() { return D.analysis.map(function (a, i) { return i; }).filter(function (i) { return AN.filter === "all" || D.analysis[i].pal === AN.filter; }); }
+  function anItem() { var l = anList(); if (AN.idx >= l.length) AN.idx = 0; return { gi: l[AN.idx], item: D.analysis[l[AN.idx]], n: l.length }; }
+  function anReset() {
+    AN.labels = {}; AN.checked = false; AN.active = null;
+    var it = anItem().item;
+    for (var i = 0; i < it.parts.length; i++) if (it.parts[i][1] !== null && it.parts[i][0]) { AN.active = i; break; }
+  }
+  function viewAnalizar() {
+    var cur = anItem(), item = cur.item, pal = D.palettes[item.pal];
+    var doneN = Object.keys(S.an).length;
+    var h = '<header class="pagehead"><span class="eyebrow">Análisis guiado · ' + doneN + " de " + D.analysis.length + ' resueltas</span><h1>Analizar</h1>' +
+      '<p class="lede">Tocá cada constituyente entre corchetes y elegí su etiqueta. Cuando termines, comprobá.</p></header>';
+    h += '<div class="chips" role="group" aria-label="Tipo de análisis">' + AN_FILTERS.map(function (f) { return '<button class="chip" data-f="' + f[0] + '" aria-pressed="' + (AN.filter === f[0]) + '">' + esc(f[1]) + "</button>"; }).join("") + "</div>";
+    h += '<section class="panel" style="display:grid;gap:22px"><div class="qhead"><span>Oración ' + (AN.idx + 1) + " de " + cur.n + " · " + esc(pal.name) + '</span><span class="mono">' + esc(unitById(item.u).short) + "</span></div>";
+    h += sentenceHTML(item, { interactive: true, labels: AN.labels, active: AN.checked ? null : AN.active, checked: AN.checked });
+    if (!AN.checked) {
+      h += '<div class="field"><span>' + (AN.active != null ? "Etiqueta para: " + fmt(item.parts[AN.active][0]) : "Elegí un constituyente") + '</span><div class="palette">' +
+        pal.items.map(function (it) { return '<button class="pal" data-lab="' + it.id + '"' + (AN.active == null ? " disabled" : "") + ">" + tag(it) + "<span>" + esc(it.name) + "</span></button>"; }).join("") + "</div></div>";
+      var total = item.parts.filter(function (p) { return p[1] !== null && p[0]; }).length;
+      var assigned = Object.keys(AN.labels).length;
+      h += '<div class="btnrow"><button class="btn btn--primary" data-act="check"' + (assigned < total ? " disabled" : "") + ">Comprobar (" + assigned + "/" + total + ')</button><button class="btn" data-act="show">Ver respuesta</button></div>';
+    } else {
+      var ok = 0, tot = 0;
+      item.parts.forEach(function (p, i) { if (p[1] !== null && p[0]) { tot++; if (accepts(p[1], AN.labels[i])) ok++; } });
+      h += '<div class="feedback ' + (ok === tot ? "ok" : "bad") + '" role="status"><strong>' + (ok === tot ? "Todo correcto" : ok + " de " + tot + " correctas") + "</strong></div>";
+      h += '<ul class="explain">' + item.parts.map(function (p) {
+        if (p[1] === null || !p[0]) return "";
+        var it = palItem(item.pal, firstAns(p[1]));
+        return "<li>" + tag(it) + '<span><span class="q">' + fmt(p[0]) + "</span>" + (p[2] ? " — " + fmt(p[2]) : "") + "</span></li>";
+      }).join("") + "</ul>";
+      h += '<span class="src">' + esc(item.src) + "</span>";
+    }
+    h += '<div class="btnrow"><button class="btn" data-act="prev">Anterior</button><button class="btn" data-act="rand">Al azar</button><button class="btn' + (AN.checked ? " btn--primary" : "") + '" data-act="next">Siguiente</button></div></section>';
+    return h;
+  }
+  function afterAnalizar(el) {
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var cur = anItem(), item = cur.item;
+      if (b.dataset.f) { AN.filter = b.dataset.f; AN.idx = 0; anReset(); render(); return; }
+      if (b.dataset.part != null && !AN.checked) { AN.active = +b.dataset.part; rerender(); return; }
+      if (b.dataset.lab && AN.active != null) {
+        AN.labels[AN.active] = b.dataset.lab;
+        var nxt = null;
+        for (var i = 0; i < item.parts.length; i++) { var j = (AN.active + 1 + i) % item.parts.length; if (item.parts[j][1] !== null && item.parts[j][0] && !(j in AN.labels)) { nxt = j; break; } }
+        AN.active = nxt != null ? nxt : AN.active;
+        rerender(); return;
+      }
+      var act = b.dataset.act;
+      if (act === "check" || act === "show") {
+        if (act === "show") item.parts.forEach(function (p, i) { if (p[1] !== null && p[0] && !(i in AN.labels)) AN.labels[i] = firstAns(p[1]); });
+        AN.checked = true;
+        if (act === "check") { S.an[cur.gi] = 1; save(); }
+        rerender(); return;
+      }
+      if (act === "next") { AN.idx = (AN.idx + 1) % cur.n; anReset(); rerender(); }
+      if (act === "prev") { AN.idx = (AN.idx - 1 + cur.n) % cur.n; anReset(); rerender(); }
+      if (act === "rand") { AN.idx = Math.floor(Math.random() * cur.n); anReset(); rerender(); }
+    });
+  }
+  function rerender() {
+    var y = window.scrollY; var el = $("#view"); el.innerHTML = RENDER[current()](); window.scrollTo(0, y);
+  }
+
+  /* ================= PRUEBAS ================= */
+  var TR = null;
+  function treeById(id) { for (var i = 0; i < D.trees.length; i++) if (D.trees[i].id === id) return D.trees[i]; return null; }
+  function viewPruebas() {
+    var h = '<header class="pagehead"><span class="eyebrow">Pruebas de reconocimiento</span><h1>Pruebas</h1><p class="lede">Árboles de decisión armados con las pruebas de la bibliografía. Respondé paso a paso sobre tu oración.</p></header>';
+    if (!TR || !treeById(TR.id)) {
+      return h + '<div class="treelist">' + D.trees.map(function (t) {
+        return '<button class="treecard" data-tree="' + t.id + '"><span class="mono small" style="color:var(--margin)">Unidad ' + unitById(t.u).n + "</span><strong>" + esc(t.title) + "</strong><span>" + esc(t.desc) + "</span></button>";
+      }).join("") + "</div>";
+    }
+    var t = treeById(TR.id);
+    var nodeId = TR.path.length ? TR.path[TR.path.length - 1].go : t.start;
+    var node = t.nodes[nodeId];
+    h = '<header class="pagehead"><span class="eyebrow">Unidad ' + unitById(t.u).n + " · Pruebas</span><h1>" + esc(t.title) + "</h1></header>";
+    if (TR.path.length) {
+      h += '<ol class="trail">' + TR.path.map(function (s) { return "<li><span>" + fmt(t.nodes[s.from].q) + "</span><b>" + fmt(s.l) + "</b></li>"; }).join("") + "</ol>";
+    }
+    h += '<section class="panel step" aria-live="polite">';
+    if (node.r) {
+      h += '<div class="result"><span class="eyebrow">Resultado</span><h2>' + esc(node.r) + "</h2><p>" + fmt(node.x) + "</p></div>";
+    } else {
+      h += "<h2>" + fmt(node.q) + "</h2>" + (node.h ? '<p class="help">' + fmt(node.h) + "</p>" : "") +
+        '<div class="opts">' + node.opts.map(function (o, i) { return '<button class="opt" data-opt="' + i + '">' + fmt(o.l) + "</button>"; }).join("") + "</div>";
+    }
+    h += '</section><div class="btnrow">' + (TR.path.length ? '<button class="btn" data-act="back">Paso atrás</button><button class="btn" data-act="restart">Empezar de nuevo</button>' : "") +
+      '<button class="btn" data-act="list">Todas las pruebas</button></div>';
+    return h;
+  }
+  function afterPruebas(el) {
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.tree) { TR = { id: b.dataset.tree, path: [] }; render(); return; }
+      if (!TR) return;
+      var t = treeById(TR.id);
+      if (b.dataset.opt != null) {
+        var from = TR.path.length ? TR.path[TR.path.length - 1].go : t.start;
+        var o = t.nodes[from].opts[+b.dataset.opt];
+        TR.path.push({ from: from, go: o.go, l: o.l }); rerender(); return;
+      }
+      if (b.dataset.act === "back") { TR.path.pop(); rerender(); }
+      if (b.dataset.act === "restart") { TR.path = []; rerender(); }
+      if (b.dataset.act === "list") { TR = null; render(); }
+    });
+  }
+
+  /* ================= FICHAS ================= */
+  var FC = { u: "all", queue: null, flipped: false, all: false };
+  function buildQueue() {
+    var q = [];
+    D.units.forEach(function (u) {
+      if (FC.u !== "all" && u.id !== FC.u) return;
+      u.cards.forEach(function (c, i) { var bx = S.cards[cardKey(u.id, i)] || 0; if (FC.all || bx < 2) q.push({ u: u.id, i: i, bx: bx }); });
+    });
+    q = shuffle(q).sort(function (a, b) { return a.bx - b.bx; });
+    FC.queue = q; FC.flipped = false;
+  }
+  function boxCounts() {
+    var c = [0, 0, 0];
+    D.units.forEach(function (u) {
+      if (FC.u !== "all" && u.id !== FC.u) return;
+      u.cards.forEach(function (_, i) { c[S.cards[cardKey(u.id, i)] || 0]++; });
+    });
+    return c;
+  }
+  function viewFichas() {
+    if (!FC.queue) buildQueue();
+    var c = boxCounts();
+    var h = '<header class="pagehead"><span class="eyebrow">Repaso espaciado</span><h1>Fichas</h1><p class="lede">Leé la pregunta, pensá la respuesta y girá la ficha. Si la sabías, pasa a dominadas; si no, vuelve al repaso.</p></header>';
+    h += unitChips(FC.u, true);
+    h += '<div class="boxes"><div><b>' + c[0] + "</b><span>Nuevas</span></div><div><b>" + c[1] + "</b><span>En repaso</span></div><div><b>" + c[2] + "</b><span>Dominadas</span></div></div>";
+    if (!FC.queue.length) {
+      h += '<section class="panel step"><h2>No quedan fichas pendientes</h2><p class="muted">Dominaste todas las fichas de esta selección.</p><div class="btnrow"><button class="btn btn--primary" data-act="all">Repasar todas igual</button><button class="btn" data-act="reset">Reiniciar esta selección</button></div></section>';
+      return h;
+    }
+    var cur = FC.queue[0], u = unitById(cur.u), card = u.cards[cur.i];
+    h += '<div class="qhead"><span>' + FC.queue.length + " en la pila" + (FC.all ? " (todas)" : "") + '</span><span class="mono">U' + u.n + " · " + esc(u.short) + "</span></div>";
+    h += '<div class="flash' + (FC.flipped ? " is-flipped" : "") + '"><div class="flash__inner" role="button" tabindex="0" data-act="flip" aria-label="Girar ficha">' +
+      '<div class="flash__face"><span class="flash__hint">Pregunta</span><p>' + fmt(card.f) + '</p></div>' +
+      '<div class="flash__face flash__face--back"><span class="flash__hint">Respuesta</span><p>' + fmt(card.b) + "</p></div></div></div>";
+    h += '<div class="btnrow">' + (FC.flipped ? '<button class="btn" data-act="again">Repasar</button><button class="btn btn--primary" data-act="know">La sé</button>' : '<button class="btn btn--primary" data-act="flip">Girar ficha</button>') + "</div>";
+    return h;
+  }
+  function afterFichas(el) {
+    function flip() { FC.flipped = !FC.flipped; var f = $(".flash", el); if (f) f.classList.toggle("is-flipped", FC.flipped); var row = $(".btnrow", el); if (row) row.innerHTML = FC.flipped ? '<button class="btn" data-act="again">Repasar</button><button class="btn btn--primary" data-act="know">La sé</button>' : '<button class="btn btn--primary" data-act="flip">Girar ficha</button>'; }
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-u],[data-act]"); if (!b) return;
+      if (b.dataset.u) { FC.u = b.dataset.u; FC.all = false; buildQueue(); rerender(); return; }
+      var a = b.dataset.act;
+      if (a === "flip") { flip(); return; }
+      if (a === "know" || a === "again") {
+        var cur = FC.queue.shift(), k = cardKey(cur.u, cur.i);
+        if (a === "know") S.cards[k] = 2;
+        else { S.cards[k] = 1; FC.queue.push({ u: cur.u, i: cur.i, bx: 1 }); }
+        save(); FC.flipped = false; rerender(); return;
+      }
+      if (a === "all") { FC.all = true; buildQueue(); rerender(); }
+      if (a === "reset") {
+        D.units.forEach(function (u) { if (FC.u !== "all" && u.id !== FC.u) return; u.cards.forEach(function (_, i) { delete S.cards[cardKey(u.id, i)]; }); });
+        save(); FC.all = false; buildQueue(); rerender(); toast("Fichas reiniciadas.");
+      }
+    });
+    el.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("flash__inner")) { e.preventDefault(); flip(); }
+    });
+  }
+
+  /* ================= PRÁCTICA ================= */
+  var PR = { u: "all", m: "prac" };
+  var QZ = null;
+  function startQuiz() {
+    var pool = [];
+    D.units.forEach(function (u) { if (PR.u !== "mix" && PR.u !== "all" && u.id !== PR.u) return; u.quiz.forEach(function (q, i) { pool.push({ u: u.id, q: q, i: i }); }); });
+    pool = shuffle(pool);
+    if (PR.m === "sim") pool = pool.slice(0, 10);
+    else if (PR.u === "all" || PR.u === "mix") pool = pool.slice(0, 15);
+    QZ = {
+      items: pool.map(function (p) { var order = shuffle(p.q.o.map(function (_, i) { return i; })); return { u: p.u, q: p.q, order: order, pick: null }; }),
+      i: 0, t0: Date.now(), done: false, u: PR.u === "all" ? "mix" : PR.u, m: PR.m
+    };
+  }
+  function viewPractica() {
+    var h;
+    if (!QZ) {
+      h = '<header class="pagehead"><span class="eyebrow">Autoevaluación</span><h1>Práctica</h1><p class="lede">Elegí una unidad y un modo. En práctica ves la explicación después de cada respuesta; el simulacro corrige al final.</p></header>';
+      h += '<section class="panel setup"><div class="field"><span>Unidad</span>' + unitChips(PR.u === "mix" ? "all" : PR.u, true) + "</div>" +
+        '<div class="field"><span>Modo</span><div class="seg"><button class="chip" data-m="prac" aria-pressed="' + (PR.m === "prac") + '">Práctica con explicación</button><button class="chip" data-m="sim" aria-pressed="' + (PR.m === "sim") + '">Simulacro · 10 preguntas</button></div></div>' +
+        '<div class="btnrow"><button class="btn btn--primary" data-act="start">Empezar</button></div></section>';
+      if (S.hist.length) {
+        h += '<section><h2 class="section-title">Historial</h2><ul class="history">' + S.hist.slice(-10).reverse().map(function (r) {
+          var d = new Date(r.t);
+          return "<li><span>" + esc(r.u === "mix" ? "Todas las unidades" : unitById(r.u).title) + ' <span class="muted">· ' + (r.m === "sim" ? "simulacro" : "práctica") + " · " + d.toLocaleDateString("es-AR") + "</span></span><span>" + r.s + "/" + r.n + "</span></li>";
+        }).join("") + "</ul></section>";
+      }
+      return h;
+    }
+    if (QZ.done) return viewResults();
+    var it = QZ.items[QZ.i], q = it.q, n = QZ.items.length;
+    h = '<div class="qhead"><span>Pregunta ' + (QZ.i + 1) + " de " + n + '</span><span class="mono">' + (QZ.m === "sim" ? '<span id="clock">0:00</span> · ' : "") + "U" + unitById(it.u).n + "</span></div>";
+    h += '<div class="progress"><i style="width:' + Math.round(QZ.i * 100 / n) + '%"></i></div>';
+    h += '<section class="panel step"><p class="question">' + fmt(q.q) + '</p><div class="answers">' + it.order.map(function (oi, k) {
+      var cls = "answer";
+      var reveal = QZ.m === "prac" && it.pick !== null;
+      if (reveal) { if (oi === q.a) cls += " is-ok"; else if (oi === it.pick) cls += " is-bad"; }
+      else if (it.pick === oi) cls += " is-picked";
+      return '<button class="' + cls + '" data-pick="' + oi + '"' + (reveal ? " disabled" : "") + "><b>" + "abcd".charAt(k) + ")</b><span>" + fmt(q.o[oi]) + "</span></button>";
+    }).join("") + "</div>";
+    if (QZ.m === "prac" && it.pick !== null) {
+      var ok = it.pick === q.a;
+      h += '<div class="feedback ' + (ok ? "ok" : "bad") + '" role="status"><strong>' + (ok ? "Correcto" : "Incorrecto") + "</strong><span>" + fmt(q.x) + "</span></div>";
+    }
+    h += "</section>";
+    var canNext = it.pick !== null;
+    h += '<div class="btnrow"><button class="btn btn--primary" data-act="next"' + (canNext ? "" : " disabled") + ">" + (QZ.i === n - 1 ? "Ver resultado" : "Siguiente") + '</button><button class="btn" data-act="quit">Salir</button></div>';
+    return h;
+  }
+  function viewResults() {
+    var ok = QZ.items.filter(function (it) { return it.pick === it.q.a; }).length, n = QZ.items.length;
+    var secs = Math.round((QZ.t1 - QZ.t0) / 1000);
+    var h = '<header class="pagehead"><span class="eyebrow">' + (QZ.m === "sim" ? "Simulacro" : "Práctica") + " · " + esc(QZ.u === "mix" ? "Todas las unidades" : unitById(QZ.u).title) + "</span>" +
+      '<div class="score">' + ok + "<small> / " + n + "</small></div>" +
+      '<p class="lede">' + Math.round(ok * 100 / n) + "% de aciertos" + (QZ.m === "sim" ? " en " + Math.floor(secs / 60) + ":" + ("0" + (secs % 60)).slice(-2) : "") + ".</p></header>";
+    var wrong = QZ.items.filter(function (it) { return it.pick !== it.q.a; });
+    if (wrong.length) {
+      h += '<section><h2 class="section-title">Para revisar</h2><ul class="reviewlist">' + wrong.map(function (it) {
+        return '<li><span class="question" style="font-size:1rem">' + fmt(it.q.q) + '</span><span><span class="muted">Tu respuesta:</span> ' + fmt(it.q.o[it.pick]) + '</span><span><span class="muted">Correcta:</span> <strong>' + fmt(it.q.o[it.q.a]) + "</strong></span><span>" + fmt(it.q.x) + "</span></li>";
+      }).join("") + "</ul></section>";
+    } else h += '<div class="feedback ok"><strong>Sin errores</strong><span>Respondiste todo bien.</span></div>';
+    h += '<div class="btnrow"><button class="btn btn--primary" data-act="again">Repetir</button><button class="btn" data-act="setup">Elegir otra práctica</button></div>';
+    return h;
+  }
+  function finishQuiz() {
+    QZ.done = true; QZ.t1 = Date.now();
+    var ok = QZ.items.filter(function (it) { return it.pick === it.q.a; }).length, n = QZ.items.length;
+    var pct = Math.round(ok * 100 / n);
+    if (QZ.u !== "mix") S.best[QZ.u] = Math.max(S.best[QZ.u] || 0, pct);
+    S.hist.push({ t: Date.now(), u: QZ.u, s: ok, n: n, m: QZ.m });
+    if (S.hist.length > 40) S.hist = S.hist.slice(-40);
+    save();
+  }
+  var clockTimer = null;
+  function afterPractica(el) {
+    clearInterval(clockTimer);
+    if (QZ && !QZ.done && QZ.m === "sim") {
+      clockTimer = setInterval(function () {
+        var c = $("#clock"); if (!c) { clearInterval(clockTimer); return; }
+        var s = Math.round((Date.now() - QZ.t0) / 1000); c.textContent = Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+      }, 1000);
+    }
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      if (!QZ) {
+        if (b.dataset.u) { PR.u = b.dataset.u === "all" ? "all" : b.dataset.u; rerender(); }
+        if (b.dataset.m) { PR.m = b.dataset.m; rerender(); }
+        if (b.dataset.act === "start") { startQuiz(); render(); }
+        return;
+      }
+      if (b.dataset.pick != null) {
+        var it = QZ.items[QZ.i];
+        if (QZ.m === "prac" && it.pick !== null) return;
+        it.pick = +b.dataset.pick; rerender(); return;
+      }
+      var a = b.dataset.act;
+      if (a === "next") { if (QZ.i < QZ.items.length - 1) { QZ.i++; render(); } else { finishQuiz(); render(); } }
+      if (a === "quit" || a === "setup") { QZ = null; render(); }
+      if (a === "again") { startQuiz(); render(); }
+    });
+  }
+
+  /* ---------- Registro de vistas ---------- */
+  var RENDER = { inicio: viewInicio, apuntes: viewApuntes, analizar: viewAnalizar, pruebas: viewPruebas, fichas: viewFichas, practica: viewPractica };
+  var AFTER = { inicio: afterInicio, apuntes: afterApuntes, analizar: afterAnalizar, pruebas: afterPruebas, fichas: afterFichas, practica: afterPractica };
+
+  /* ---------- Arranque ---------- */
+  function boot() {
+    applyTheme();
+    document.querySelectorAll("[data-nav]").forEach(function (n) { n.innerHTML = navHTML(); });
+    document.addEventListener("click", function (e) {
+      var g = e.target.closest("[data-go]");
+      if (g && !e.target.closest("#view [data-unit]")) { go(g.dataset.go); }
+      if (e.target.closest("[data-theme-btn]")) cycleTheme();
+    });
+    window.addEventListener("hashchange", render);
+    anReset();
+    render();
+
+    var sp = $("#splash");
+    if (sp) {
+      requestAnimationFrame(function () { sp.classList.add("ready"); });
+      var hide = function () { sp.classList.add("out"); setTimeout(function () { sp.hidden = true; }, 520); };
+      var t = setTimeout(hide, 1500);
+      sp.addEventListener("click", function () { clearTimeout(t); hide(); });
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+})();
+
+</script>
+
+</body>
+</html>
